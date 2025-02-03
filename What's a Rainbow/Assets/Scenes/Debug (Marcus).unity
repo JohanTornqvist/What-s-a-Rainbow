@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8116352}
   - component: {fileID: 8116351}
   - component: {fileID: 8116354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plattfrom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 918133251}
   - component: {fileID: 918133250}
   - component: {fileID: 918133249}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 10
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 29e3766b09e26674e977a878a45b793f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 1370743877}
   - component: {fileID: 1370743880}
   - component: {fileID: 1370743879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
