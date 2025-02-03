@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovementChaser : MonoBehaviour
 {
@@ -9,35 +10,43 @@ public class EnemyMovementChaser : MonoBehaviour
      * Instead, its purpose is to make the player's opponent move, and its name is Enemy.
      * TLDR Its the Enemys movement Script
      */
+
     [SerializeField] float moveSpeed = 17f;
+    [SerializeField] float moveDuration = 3f; // Time before the enemy destroys itself
+
     Rigidbody2D rb;
+    GameObject player;
+    bool shouldMove = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player");
     }
 
     void Update()
     {
-        rb.velocity = new Vector2(moveSpeed, 0f);
+        if (shouldMove && player != null)
+        {
+            // Move towards the player
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+        }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        moveSpeed = -moveSpeed;
-        FlipSprite();
+        if (collision.CompareTag("Player"))
+        {
+            shouldMove = true;
+            StopAllCoroutines(); // Stop any previous stop timer (prevents conflicts)
+            StartCoroutine(DestroyAfterDelay()); // Start countdown to destroy
+        }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    IEnumerator DestroyAfterDelay()
     {
-        moveSpeed = -moveSpeed;
-        FlipSprite();
+        yield return new WaitForSeconds(moveDuration);
+        Destroy(gameObject); // Destroy the enemy after the delay
     }
-
-    void FlipSprite()
-    {
-        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-    }
-
-
-
 }
