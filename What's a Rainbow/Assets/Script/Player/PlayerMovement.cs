@@ -5,6 +5,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class playerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] GameObject player;
+    [SerializeField] int playerState = 0;
 
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
@@ -22,7 +24,6 @@ public class playerMovement : MonoBehaviour
     [SerializeField] bool inAir = false;
     public float airTimeTimer = 0f;
     public float gravityTranstion = 1f;
-    private float gravityTranstionAmount = 0;
     [SerializeField] float playerGravity = 10f;
 
     [Header("Ground Check:")]
@@ -32,12 +33,21 @@ public class playerMovement : MonoBehaviour
     public bool canMove = true;
     public bool canJump = false;
 
+    [Header("State saves:")]
+    public float normMoveSpeedSave;
+    public float huntMoveSpeedSave = 0;
+    public float sadMoveSpeedSave = 0;
+    public Volume globalVolume;
+    public VolumeProfile normVolume;
+    public VolumeProfile huntVolume;
+    public VolumeProfile sadVolume;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         airTimeTimer = airTime;
+        normMoveSpeedSave = moveSpeed;
         rb.gravityScale = playerGravity;
     }
     void OnMove(InputValue value)
@@ -79,14 +89,43 @@ public class playerMovement : MonoBehaviour
         }
 
         if (airTimeTimer <= 0f)
-        {
-            gravityTranstionAmount = playerGravity / gravityTranstion;
-            
+        {   
             inAir = false;
             airTimeTimer = airTime;
             rb.gravityScale = playerGravity;
             rb.drag = linDrag;
             rb.angularDrag = angleDrag;
         }
+
+        switch (playerState)
+        {
+            case 0:
+                normal();
+                break;
+            case 1:
+                hunting();
+                break;
+            case 2:
+                sad();
+                break;
+        }
+    }
+
+    void normal()
+    {
+        moveSpeed = normMoveSpeedSave;
+        globalVolume.profile = normVolume;
+    }
+
+    void hunting()
+    {
+        moveSpeed = huntMoveSpeedSave;
+        globalVolume.profile = huntVolume;
+    }
+
+    void sad()
+    {
+        moveSpeed = sadMoveSpeedSave;
+        globalVolume.profile = sadVolume;
     }
 }
