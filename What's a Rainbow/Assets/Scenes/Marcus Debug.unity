@@ -280,6 +280,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+<<<<<<< HEAD:What's a Rainbow/Assets/Scenes/Debug (Marcus).unity
+=======
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +450,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> aaf1fc8d0ef4e9e28a5b2001865377b10592b973:What's a Rainbow/Assets/Scenes/Marcus Debug.unity
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +758,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+<<<<<<< HEAD:What's a Rainbow/Assets/Scenes/Debug (Marcus).unity
+--- !u!1001 &4699548861280348753
+=======
 --- !u!1001 &257103026168258175
+>>>>>>> aaf1fc8d0ef4e9e28a5b2001865377b10592b973:What's a Rainbow/Assets/Scenes/Marcus Debug.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -763,17 +770,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD:What's a Rainbow/Assets/Scenes/Debug (Marcus).unity
+    - target: {fileID: 278849153724442949, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153643759258011099, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+=======
     - target: {fileID: 3548672668408236676, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: moveSpeed
       value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3651624095023686373, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.03
+      value: -8.991
       objectReference: {fileID: 0}
     - target: {fileID: 3651624095023686373, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9
+      value: -2.961
       objectReference: {fileID: 0}
     - target: {fileID: 3651624095023686373, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -809,47 +862,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: -1.4909635
+      value: -1.0037785
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: -0.83653164
+      value: -0.5975354
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: 1.513208
+      value: 0.9938508
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: -0.8575344
+      value: -0.57257724
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: 1.5157161
+      value: 0.986608
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: 1.4555445
+      value: 0.13457751
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: -1.4862785
+      value: 1.0009544
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: 1.4497622
+      value: 0.9867438
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
-      value: -1.0769346
+      value: -1.0167267
       objectReference: {fileID: 0}
     - target: {fileID: 3764765188721359843, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
-      value: 0.8724157
+      value: 0.9821478
       objectReference: {fileID: 0}
     - target: {fileID: 6097304143629630232, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Color.b
@@ -863,14 +916,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.59748423
       objectReference: {fileID: 0}
+    - target: {fileID: 7200442150298887250, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200442150298887250, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
+      propertyPath: m_Constraints
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8166162804040067884, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
       propertyPath: m_Name
       value: Enemy (Chaser)
       objectReference: {fileID: 0}
+>>>>>>> aaf1fc8d0ef4e9e28a5b2001865377b10592b973:What's a Rainbow/Assets/Scenes/Marcus Debug.unity
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< HEAD:What's a Rainbow/Assets/Scenes/Debug (Marcus).unity
+  m_SourcePrefab: {fileID: 100100000, guid: b3bfe7a5894e49e4fa74c7258c746d97, type: 3}
+=======
   m_SourcePrefab: {fileID: 100100000, guid: 7e3aa01908533cf488ebfd977edfff5c, type: 3}
 --- !u!1001 &6904777888531069729
 PrefabInstance:
@@ -932,11 +997,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 918133255}
   m_SourcePrefab: {fileID: 100100000, guid: eb0022868c4174540ae69e1ac24bf0e9, type: 3}
+>>>>>>> aaf1fc8d0ef4e9e28a5b2001865377b10592b973:What's a Rainbow/Assets/Scenes/Marcus Debug.unity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
+  - {fileID: 4699548861280348753}
   - {fileID: 619394802}
   - {fileID: 813040182}
   - {fileID: 1370743878}
