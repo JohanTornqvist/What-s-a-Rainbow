@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Killscript : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Killscript : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("Compare tag");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        
     }
 }
