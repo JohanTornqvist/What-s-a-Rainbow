@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4343501823122096913}
   - component: {fileID: 8595380188639872967}
   m_Layer: 7
-  m_Name: Enemy (Patroler)
+  m_Name: Enemy (Patroler) 2
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

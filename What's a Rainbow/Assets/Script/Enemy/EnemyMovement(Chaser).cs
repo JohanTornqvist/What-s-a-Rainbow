@@ -12,7 +12,7 @@ public class EnemyMovementChaser : MonoBehaviour
      */
 
     [SerializeField] float moveSpeed = 17f;
-    [SerializeField] float moveDuration = 3f; // Time before the enemy destroys itself
+    [SerializeField] float moveDuration = 7f; // Time before the enemy destroys itself
 
     Rigidbody2D rb;
     GameObject player;
