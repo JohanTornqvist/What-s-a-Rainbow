@@ -11,17 +11,22 @@ public class playerMovement : MonoBehaviour
     Vector2 moveInput;
     public Rigidbody2D rb;
     [SerializeField] Collider2D playerCollider;
-    [SerializeField] Transform player;
-    [SerializeField] Transform ground;
+    [SerializeField] GameObject player;
 
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float jumpPower = 10f;
+    [SerializeField] float airTime = 1f;
+    [SerializeField] float linDrag = 1f;
+    [SerializeField] float angleDrag = 1f;
+    [SerializeField] bool inAir = false;
+    public float airTimeTimer = 0f;
+    public float gravityTranstion = 1f;
+    private float gravityTranstionAmount = 0;
+    [SerializeField] float playerGravity = 10f;
 
     [Header("Ground Check:")]
     [SerializeField] ContactFilter2D groundFilter;
-    [SerializeField] ContactFilter2D platformFilter;
-    [SerializeField] LayerMask groundLayers;
 
     [Header("Movment Toggles:")]
     public bool canMove = true;
@@ -31,10 +36,9 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
-        groundFilter.SetLayerMask(groundLayers);
-
+        airTimeTimer = airTime;
+        rb.gravityScale = playerGravity;
     }
     void OnMove(InputValue value)
     {
@@ -49,6 +53,10 @@ public class playerMovement : MonoBehaviour
         if (canJump == true)
         {
             rb.velocity += new Vector2(0, jumpPower);
+            rb.gravityScale = 0f;
+            rb.drag = 0f;
+            rb.angularDrag = 0f;
+            inAir = true;
         }
     }
 
@@ -64,5 +72,21 @@ public class playerMovement : MonoBehaviour
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         }
 
+        if(inAir == true)
+        {
+            airTimeTimer -= 0.1f * Time.deltaTime;
+            airTimeTimer = Mathf.Clamp(airTimeTimer, 0f, airTime);
+        }
+
+        if (airTimeTimer <= 0f)
+        {
+            gravityTranstionAmount = playerGravity / gravityTranstion;
+            
+            inAir = false;
+            airTimeTimer = airTime;
+            rb.gravityScale = playerGravity;
+            rb.drag = linDrag;
+            rb.angularDrag = angleDrag;
+        }
     }
 }

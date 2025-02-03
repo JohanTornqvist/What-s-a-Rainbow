@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 3904651099320909819}
   - component: {fileID: 912612601392286202}
   - component: {fileID: -6814507798317609712}
-  m_Layer: 0
+  - component: {fileID: 1604846346009718826}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -104,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 28.2
   m_AngularDrag: 40.97
-  m_GravityScale: 4.03
+  m_GravityScale: 45.44
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -115,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &4413651958475689337
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -209,10 +210,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3966367285131494107}
   playerCollider: {fileID: 4413651958475689337}
-  player: {fileID: 6574246440443356803}
-  ground: {fileID: 0}
-  moveSpeed: 10
-  jumpPower: 10
+  player: {fileID: 4691193331072622238}
+  moveSpeed: 13.87
+  jumpPower: 8.8
+  airTime: 0.03
+  linDrag: 4.12
+  angleDrag: 4.27
+  inAir: 0
+  airTimeTimer: 0
+  gravityTranstion: 0.65
+  playerGravity: 11.3
   groundFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -227,26 +234,21 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  platformFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
   canMove: 1
-  canJump: 0
+  canJump: 1
 --- !u!114 &-6814507798317609712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1604846346009718826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
