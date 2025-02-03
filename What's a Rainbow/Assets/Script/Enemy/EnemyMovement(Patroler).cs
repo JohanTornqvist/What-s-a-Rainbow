@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    /* 
+     * There was once a script whose purpose was to make the player move. This is not that script.
+     * Instead, its purpose is to make the player's opponent move, and its name is Enemy.
+     * TLDR Its the Enemys movement Script
+     */
     [SerializeField] float moveSpeed = 3f;
     Rigidbody2D rb;
 
