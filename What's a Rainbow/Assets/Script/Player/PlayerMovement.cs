@@ -13,7 +13,8 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] GameObject player;
-    [SerializeField] int playerState = 0;
+    public int playerState = 0;
+    public Emotion emotionControler;
 
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
@@ -49,6 +50,9 @@ public class playerMovement : MonoBehaviour
         airTimeTimer = airTime;
         normMoveSpeedSave = moveSpeed;
         rb.gravityScale = playerGravity;
+
+        GameObject Emotion = GameObject.FindWithTag("EmotionControle");
+        emotionControler = Emotion.GetComponent<Emotion>();
     }
     void OnMove(InputValue value)
     {
@@ -114,18 +118,15 @@ public class playerMovement : MonoBehaviour
     void normal()
     {
         moveSpeed = normMoveSpeedSave;
-        globalVolume.profile = normVolume;
     }
 
     void hunting()
     {
         moveSpeed = huntMoveSpeedSave;
-        globalVolume.profile = huntVolume;
     }
 
     void sad()
     {
         moveSpeed = sadMoveSpeedSave;
-        globalVolume.profile = sadVolume;
     }
 }
