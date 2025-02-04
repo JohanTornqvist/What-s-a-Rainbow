@@ -11,7 +11,7 @@ public class Killscript : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("Compare tag");
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         
