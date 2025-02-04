@@ -33,6 +33,9 @@ public class playerMovement : MonoBehaviour
     [Header("Movment Toggles:")]
     public bool canMove = true;
     public bool canJump = false;
+    public bool hasDash = false;
+    public bool hasWallJump = false;
+    public bool hasDoubleJump = false;
 
     [Header("State saves:")]
     public float normMoveSpeedSave;
