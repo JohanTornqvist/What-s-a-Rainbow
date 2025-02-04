@@ -1,0 +1,57 @@
+.header {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+    width: auto;
+    height: auto;
+}
+
+.button {
+    width: 220px;
+    height: 140px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    flex-shrink: 0;
+    font-size: 34px;
+    -unity-background-image-tint-color: rgb(183, 183, 183);
+    color: rgb(0, 0, 0);
+}
+
+.button:hover {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
+    width: 240px;
+    height: 160px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    transition-timing-function: ease;
+}
+
+.button:active {
+}
+
+.Labels {
+    font-size: 38px;
+    color: rgb(255, 255, 255);
+}
+
+#VolumeSlider Label {
+    min-width: auto;
+    min-height: auto;
+}
+
+.backbutton:hover {
+    transition-duration: 0.1s;
+    -unity-background-image-tint-color: rgb(141, 141, 141);
+    color: rgb(255, 255, 255);
+}
+
+.backbutton {
+    transition-duration: 0.1s;
+}

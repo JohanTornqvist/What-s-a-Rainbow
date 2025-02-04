@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 
 public class playerMovement : MonoBehaviour
 {
-    Vector2 moveInput;
+    public Vector2 moveInput;
     public Rigidbody2D rb;
     [SerializeField] Collider2D playerCollider;
     [SerializeField] GameObject player;
@@ -83,7 +83,11 @@ public class playerMovement : MonoBehaviour
     {
         if (moveInput != Vector2.zero)
         {
-            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            if (canMove == true) 
+            {
+               rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            }
+            
         }
 
         if(inAir == true)

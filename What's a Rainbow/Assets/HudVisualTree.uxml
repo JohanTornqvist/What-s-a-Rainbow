@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/Something.uss?fileID=7433441132597879392&amp;guid=910aa1637c7bb2942af5c28ae45613e8&amp;type=3#Something" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: column;">
+        <ui:VisualElement name="TopContainer" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="TopLeftContainer" style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: flex-start; width: 0; height: 0;">
+                <ui:ProgressBar value="22" title="name" name="Cooldown" style="opacity: 1; display: flex; visibility: visible; overflow: visible; width: 50px; height: 50px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: url(&quot;project://database/Assets/Settings/Lit2DSceneTemplate.scenetemplate?fileID=-3604256930052969394&amp;guid=d03ed43fc9d8a4f2e9fa70c1c7916eb9&amp;type=2#Lit 2D&quot;);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="TopRightContainer" style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: flex-end;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomContainer" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="BottomLeftContainer" style="flex-grow: 1; flex-direction: row; align-items: auto;" />
+            <ui:VisualElement name="BottomRightContainer" style="flex-grow: 1; flex-direction: row-reverse; justify-content: flex-end;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

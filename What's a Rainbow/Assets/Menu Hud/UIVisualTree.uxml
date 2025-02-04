@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="MenuVisualTree" src="project://database/Assets/Menu%20Hud/MenuVisualTree.uxml?fileID=9197481963319205126&amp;guid=649e2da0e488c414da08cdee51df8659&amp;type=3#MenuVisualTree" />
+    <ui:Template name="SettingsVisualTree" src="project://database/Assets/Menu%20Hud/SettingsVisualTree.uxml?fileID=9197481963319205126&amp;guid=cdd2fe1bc77280341a6cc0e5ad8da1e3&amp;type=3#SettingsVisualTree" />
+    <ui:Instance template="MenuVisualTree" name="MenuVisualTree" style="position: absolute; width: 100%; height: 100%;" />
+    <ui:Instance template="SettingsVisualTree" name="SettingsVisualTree" style="position: absolute; width: 100%; height: 100%; display: none;" />
+</ui:UXML>

@@ -11,7 +11,7 @@ public class Emotion : MonoBehaviour
 
 
     public playerMovement playerMove;
-    [SerializeField] int playerState = 0;
+    public int playerState = 0;
 
     public Volume globalVolume;
     public VolumeProfile normVolume;
@@ -55,6 +55,8 @@ public class Emotion : MonoBehaviour
         {
             colorAdjustments.postExposure.value = -1.8f; // Instantly darken
             StartCoroutine(RestoreExposure(colorAdjustments, 2f)); // Restore after 1 second
+
+
         }
     }
 
@@ -62,6 +64,7 @@ public class Emotion : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         colorAdjustments.postExposure.value = 4.35f; // Restore exposure
+
     }
 
 
