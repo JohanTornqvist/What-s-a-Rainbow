@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 public class PositionTracker : MonoBehaviour
 {
-    // Interval (in seconds) to record the position
-    [SerializeField] float trackInterval = 0.5f; 
+    [SerializeField] float trackInterval = 0.5f;
+    [SerializeField] int maxPositions = 100; // Prevents excessive memory usage
     private List<Vector3> positions = new List<Vector3>();
+    private Collider2D col;
 
     void Start()
     {
+        col = GetComponent<Collider2D>();
         StartCoroutine(TrackPosition());
     }
 
@@ -17,12 +19,18 @@ public class PositionTracker : MonoBehaviour
     {
         while (true)
         {
-            positions.Add(transform.position);
+            Vector3 currentPos = col != null ? col.bounds.center : transform.position;
+
+            if (positions.Count >= maxPositions)
+            {
+                positions.RemoveAt(0); // Keep memory usage low
+            }
+
+            positions.Add(currentPos);
             yield return new WaitForSeconds(trackInterval);
         }
     }
 
-    // Returns a copy of the tracked positions so external scripts can use the trail.
     public List<Vector3> GetTrackedPositions()
     {
         return new List<Vector3>(positions);

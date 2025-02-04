@@ -1,19 +1,29 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class TheHunter : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;         
-    [SerializeField] float chaseInterval = 0.1f;     
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float jumpForce = 15f;
+    [SerializeField] float forwardJumpForce = 10f;
+    [SerializeField] float chaseInterval = 0.1f;
+    [SerializeField] float jumpCooldown = 2f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 0.2f;
+    [SerializeField] float maxJumpHeightCheck = 5f;
+    [SerializeField] float ledgeCheckDistance = 1f;
 
-    private PositionTracker playerTracker;           
-    private Transform playerTransform;              
-    private List<Vector3> chasePath = new List<Vector3>();
-    private int currentTargetIndex = 0;
+    private PositionTracker playerTracker;
+    private Transform playerTransform;
+    private Rigidbody2D rb;
+    private bool isGrounded;
+    private float lastJumpTime;
 
     void Start()
     {
-        // Find the player GameObject by tag and get its components.
+        rb = GetComponent<Rigidbody2D>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -35,35 +45,67 @@ public class TheHunter : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        CheckIfGrounded();
+    }
+
     IEnumerator ChasePlayer()
     {
         while (true)
         {
-            // Get the latest trail of the player's positions.
-            chasePath = playerTracker.GetTrackedPositions();
-
-            // If there are positions in the list, follow them one by one.
-            if (chasePath.Count > 0)
+            if (playerTransform != null)
             {
-                // Ensure our target index is within range. Reset if needed.
-                if (currentTargetIndex >= chasePath.Count)
+                Vector3 direction = (playerTransform.position - transform.position).normalized;
+                rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+
+                if (Time.time > lastJumpTime + jumpCooldown && isGrounded && Mathf.Abs(rb.velocity.y) < 0.1f)
                 {
-                    currentTargetIndex = 0;
-                }
-
-                Vector3 targetPos = chasePath[currentTargetIndex];
-
-                // Move the enemy towards the target position.
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-
-                // If the enemy is close enough to the target, move on to the next point.
-                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-                {
-                    currentTargetIndex++;
+                    if (IsLedgeAhead())
+                    {
+                        JumpForward();
+                    }
+                    else if (!IsCeilingAbove())
+                    {
+                        Jump();
+                    }
                 }
             }
 
             yield return new WaitForSeconds(chaseInterval);
         }
+    }
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        lastJumpTime = Time.time;
+    }
+
+    void JumpForward()
+    {
+        rb.velocity = new Vector2(moveSpeed * Mathf.Sign(rb.velocity.x), jumpForce);
+        lastJumpTime = Time.time;
+    }
+
+    void CheckIfGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
+    bool IsCeilingAbove()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, maxJumpHeightCheck, groundLayer);
+        return hit.collider != null;
+    }
+
+    bool IsLedgeAhead()
+    {
+        Vector2 checkPosition = (Vector2)transform.position + new Vector2(Mathf.Sign(rb.velocity.x) * ledgeCheckDistance, 0);
+        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, groundCheckRadius, groundLayer);
+
+        Debug.DrawRay(checkPosition, Vector2.down * groundCheckRadius, Color.red); // Debugging tool
+
+        return hit.collider == null;
     }
 }
