@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class TheHunter : MonoBehaviour
 {
@@ -9,11 +8,9 @@ public class TheHunter : MonoBehaviour
     [SerializeField] float forwardJumpForce = 10f;
     [SerializeField] float chaseInterval = 0.1f;
     [SerializeField] float jumpCooldown = 2f;
+    [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck;
-    [SerializeField] float groundCheckRadius = 0.2f;
-    [SerializeField] float maxJumpHeightCheck = 5f;
-    [SerializeField] float ledgeCheckDistance = 1f;
 
     private PositionTracker playerTracker;
     private Transform playerTransform;
@@ -56,19 +53,12 @@ public class TheHunter : MonoBehaviour
         {
             if (playerTransform != null)
             {
-                Vector3 direction = (playerTransform.position - transform.position).normalized;
-                rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+                MoveTowardsPlayer();
 
+                // Only allow jumping if the cooldown is passed and we are grounded
                 if (Time.time > lastJumpTime + jumpCooldown && isGrounded && Mathf.Abs(rb.velocity.y) < 0.1f)
                 {
-                    if (IsLedgeAhead())
-                    {
-                        JumpForward();
-                    }
-                    else if (!IsCeilingAbove())
-                    {
-                        Jump();
-                    }
+                    PerformJumpBehavior();
                 }
             }
 
@@ -76,15 +66,26 @@ public class TheHunter : MonoBehaviour
         }
     }
 
-    void Jump()
+    void MoveTowardsPlayer()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        lastJumpTime = Time.time;
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
     }
 
-    void JumpForward()
+    void PerformJumpBehavior()
     {
-        rb.velocity = new Vector2(moveSpeed * Mathf.Sign(rb.velocity.x), jumpForce);
+        // If we're not grounded and moving, initiate jump
+        if (!isGrounded)
+        {
+            Jump();
+        }
+    }
+
+    void Jump()
+    {
+        // Apply both forward and upward forces at the same time
+        float jumpDirection = Mathf.Sign(rb.velocity.x) * forwardJumpForce;
+        rb.velocity = new Vector2(jumpDirection, jumpForce); // Combine forward and upward movement
         lastJumpTime = Time.time;
     }
 
@@ -93,19 +94,10 @@ public class TheHunter : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
-    bool IsCeilingAbove()
+    // Automatically jump forward and up when leaving a collider
+    private void OnTriggerExit2D(Collider2D other)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, maxJumpHeightCheck, groundLayer);
-        return hit.collider != null;
-    }
-
-    bool IsLedgeAhead()
-    {
-        Vector2 checkPosition = (Vector2)transform.position + new Vector2(Mathf.Sign(rb.velocity.x) * ledgeCheckDistance, 0);
-        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, groundCheckRadius, groundLayer);
-
-        Debug.DrawRay(checkPosition, Vector2.down * groundCheckRadius, Color.red); // Debugging tool
-
-        return hit.collider == null;
+        // Automatically jump forward and up when exiting a trigger collider
+        Jump();
     }
 }
