@@ -55,6 +55,8 @@ public class Emotion : MonoBehaviour
         {
             colorAdjustments.postExposure.value = -1.8f; // Instantly darken
             StartCoroutine(RestoreExposure(colorAdjustments, 2f)); // Restore after 1 second
+
+
         }
     }
 
