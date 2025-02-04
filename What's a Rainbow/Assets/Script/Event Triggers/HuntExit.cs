@@ -29,7 +29,7 @@ public class HuntExitScript : MonoBehaviour
 
     public void Update()
     {
-        if (playerMove.playerState == 1)
+        if (playerMove.playerState == 0)
         {
             trigger.enabled = false;
         }
