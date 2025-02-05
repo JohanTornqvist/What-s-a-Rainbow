@@ -58,27 +58,55 @@ public class TheHunter : MonoBehaviour
 
     void DecideAction()
     {
-        if (!isGrounded) return; // Avoid decisions mid-air
+        if (!isGrounded) return; // Avoid making decisions mid-air
+
+        // Always prioritize ledge jumps first
+        if (IsApproachingLedge())
+        {
+            JumpForward();
+            return;
+        }
 
         Vector2 diff = playerTransform.position - transform.position;
 
-        if (diff.y > 1f && CanJump())
+        // If the player is above
+        if (diff.y > 1f)
         {
-            JumpUp();  // Jump up if the player is above
+            if (Mathf.Abs(diff.x) < 0.5f) // Only stop if X positions are nearly the same
+            {
+                rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                MoveTowardsPlayer(); // Adjust X position
+            }
+            return;
         }
-        else if (diff.y < -1f && CanJump())
+
+        // If the player is below
+        if (diff.y < -1f)
         {
-            MoveToEdgeAndJumpOff(); // Jump down if the player is below
+            if (CanJump())
+            {
+                JumpUp();
+            }
+
+            if (Mathf.Abs(diff.x) < 0.5f) // Only stop if X positions are nearly the same
+            {
+                rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                MoveTowardsPlayer(); // Adjust X position
+            }
+            return;
         }
-        else if (IsApproachingLedge())
-        {
-            JumpForward(); // Jump forward over gaps
-        }
-        else
-        {
-            MoveTowardsPlayer(); // Chase the player normally
-        }
+
+        // Default: Chase the player
+        MoveTowardsPlayer();
     }
+
+
 
     void MoveTowardsPlayer()
     {
