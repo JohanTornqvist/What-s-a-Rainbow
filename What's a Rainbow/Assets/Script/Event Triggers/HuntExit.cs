@@ -9,11 +9,13 @@ public class HuntExitScript : MonoBehaviour
     public Volume globalVolume;
     public Emotion emotionControler;
     public playerMovement playerMove;
+    public Hunt_Audio_Controler huntAudio;
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<playerMovement>();
+        huntAudio = player.GetComponent<Hunt_Audio_Controler>();
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
@@ -24,6 +26,7 @@ public class HuntExitScript : MonoBehaviour
         if (other.CompareTag("Player")) // Make sure the Player has the correct tag
         {
             emotionControler.playerState = 0;  // Set the player state
+            huntAudio.playerState = 0;
         }
     }
 
