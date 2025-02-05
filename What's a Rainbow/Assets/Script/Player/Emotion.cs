@@ -11,6 +11,7 @@ public class Emotion : MonoBehaviour
 
 
     public playerMovement playerMove;
+    public Hunt_Audio_Controler huntAudio;
     public int playerState = 0;
 
     public Volume globalVolume;
@@ -23,6 +24,7 @@ public class Emotion : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<playerMovement>();
+        huntAudio = player.GetComponent<Hunt_Audio_Controler>();
     }
     void Update()
     {
@@ -50,13 +52,12 @@ public class Emotion : MonoBehaviour
     {
         globalVolume.profile = huntVolume;
         playerMove.playerState = playerState;
+        huntAudio.playerState = playerState;
 
         if (globalVolume.profile.TryGet(out ColorAdjustments colorAdjustments))
         {
             colorAdjustments.postExposure.value = -1.8f; // Instantly darken
             StartCoroutine(RestoreExposure(colorAdjustments, 2f)); // Restore after 1 second
-
-
         }
     }
 

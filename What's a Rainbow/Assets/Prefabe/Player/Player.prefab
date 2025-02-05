@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4413651958475689337}
   - component: {fileID: 3904651099320909819}
   - component: {fileID: 912612601392286202}
-  - component: {fileID: -6814507798317609712}
-  - component: {fileID: 1604846346009718826}
+  - component: {fileID: 4613600515255562313}
+  - component: {fileID: 3430262830771285835}
+  - component: {fileID: 7582597536448015061}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -208,9 +209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3fdee9b4b66d4d984f685f1220202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
   rb: {fileID: 3966367285131494107}
   playerCollider: {fileID: 4413651958475689337}
   player: {fileID: 4691193331072622238}
+  playerState: 0
+  emotionControler: {fileID: 0}
   moveSpeed: 13.87
   jumpPower: 8.8
   airTime: 0.03
@@ -236,7 +240,113 @@ MonoBehaviour:
     maxNormalAngle: 0
   canMove: 1
   canJump: 1
---- !u!114 &-6814507798317609712
+  hasDash: 0
+  hasWallJump: 0
+  hasDoubleJump: 0
+  normMoveSpeedSave: 14
+  huntMoveSpeedSave: 20
+  sadMoveSpeedSave: 7
+  globalVolume: {fileID: 0}
+  normVolume: {fileID: 11400000, guid: e7c5eda36ea9b1a498840585df38abaa, type: 2}
+  huntVolume: {fileID: 11400000, guid: e6c80c820a6773349bc6caad6376f584, type: 2}
+  sadVolume: {fileID: 11400000, guid: 50f9828d74be11d4ebb9328c657812c7, type: 2}
+--- !u!82 &4613600515255562313
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3430262830771285835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1604846346009718826
+--- !u!114 &7582597536448015061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,6 +367,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4691193331072622238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
+  m_Script: {fileID: 11500000, guid: 0185f3e583aec844c8ec6e4ed587a8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 4613600515255562313}
+  activeAudio: {fileID: 8300000, guid: 165fe9b278a2f8249b4b11b31a0a5920, type: 3}
+  playerState: 0
+  audioClips:
+  - {fileID: 8300000, guid: 165fe9b278a2f8249b4b11b31a0a5920, type: 3}
+  - {fileID: 8300000, guid: 22ce453df62c54f4f94bc550f3899d08, type: 3}
+  - {fileID: 8300000, guid: ea514a30b427d09488e5e9479a599a19, type: 3}
+  - {fileID: 8300000, guid: 0ac8ff3cf79a10e42a4dba733ecfb1f4, type: 3}
+  - {fileID: 8300000, guid: 165fe9b278a2f8249b4b11b31a0a5920, type: 3}
+  - {fileID: 8300000, guid: 165fe9b278a2f8249b4b11b31a0a5920, type: 3}
+  - {fileID: 8300000, guid: 22ce453df62c54f4f94bc550f3899d08, type: 3}
+  - {fileID: 8300000, guid: 22ce453df62c54f4f94bc550f3899d08, type: 3}
