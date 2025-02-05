@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PositionTracker : MonoBehaviour
 {
     [SerializeField] float trackInterval = 0.5f;
-    [SerializeField] int maxPositions = 100; // Prevents excessive memory usage
+    [SerializeField] int maxPositions = 1000; 
     private List<Vector3> positions = new List<Vector3>();
     private Collider2D col;
 
@@ -19,18 +19,17 @@ public class PositionTracker : MonoBehaviour
     {
         while (true)
         {
-            Vector3 currentPos = col != null ? col.bounds.center : transform.position;
-
+            Vector3 currentPos = (col != null) ? col.bounds.center : transform.position;
             if (positions.Count >= maxPositions)
             {
-                positions.RemoveAt(0); // Keep memory usage low
+                positions.RemoveAt(0); 
             }
-
             positions.Add(currentPos);
             yield return new WaitForSeconds(trackInterval);
         }
     }
 
+    /// Returns a copy of the tracked positions.
     public List<Vector3> GetTrackedPositions()
     {
         return new List<Vector3>(positions);
