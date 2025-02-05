@@ -8,7 +8,7 @@
                 <ui:Slider label="Volume" high-value="1" name="VolumeSlider" class="Labels" style="width: 266px; background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);" />
                 <ui:Toggle label="Mute" name="MuteToggle" class="Labels" style="color: rgb(0, 0, 0);" />
             </ui:VisualElement>
-            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="Labels backbutton" style="margin-top: 25px; margin-bottom: 0; margin-left: 0; background-color: rgba(188, 188, 188, 0); border-top-left-radius: 14px; border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-bottom-left-radius: 14px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); transition-duration: 0.1s; color: rgb(0, 0, 0);" />
+            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="Labels" style="margin-top: 25px; margin-bottom: 0; margin-left: 0; background-color: rgba(188, 188, 188, 0); border-top-left-radius: 14px; border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-bottom-left-radius: 14px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); transition-duration: 0.1s; color: rgb(0, 0, 0); width: 287px; height: auto;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

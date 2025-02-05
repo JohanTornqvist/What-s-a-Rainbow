@@ -8,6 +8,8 @@ public class HuntEnterScript : MonoBehaviour
     [SerializeField] private Collider2D trigger;
     public Volume globalVolume;
     public Emotion emotionControler;
+    public AudioSource audioSource;
+    public AudioClip audio_hunt;
     public playerMovement playerMove;
 
     private void Start()
@@ -17,34 +19,43 @@ public class HuntEnterScript : MonoBehaviour
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
+
+        // Ensure audioSource is assigned
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Make sure the Player has the correct tag
+        if (other.CompareTag("Player")) // Ensure the Player has the correct tag
         {
-            emotionControler.playerState = 1;  // Set the player state
+            emotionControler.playerState = 1;  // Set player state
             playerMove.canMove = false;        // Disable movement
 
-            // Start a coroutine to wait and enable movement after a delay
+            // Start coroutine to re-enable movement after delay
             StartCoroutine(EnableMovementAfterDelay(2f));
         }
     }
+
     private IEnumerator EnableMovementAfterDelay(float delay)
     {
-        // Wait for the specified amount of time
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay); // Wait for the specified time
 
-        // Re-enable movement
-        playerMove.canMove = true;
+        playerMove.canMove = true;  // Re-enable movement
+        if (audioSource != null)
+            audioSource.PlayOneShot(audio_hunt);
     }
 
     public void Update()
     {
-        if(playerMove.playerState == 1)
+        if (emotionControler.playerState == 1)
         {
-            trigger.enabled = false;
+            if (trigger != null)
+                trigger.enabled = false;
         }
-        else trigger.enabled = true;
+        else if (trigger != null)
+        {
+            trigger.enabled = true;
+        }
     }
 }

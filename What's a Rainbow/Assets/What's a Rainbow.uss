@@ -45,13 +45,3 @@
     min-width: auto;
     min-height: auto;
 }
-
-.backbutton:hover {
-    transition-duration: 0.1s;
-    -unity-background-image-tint-color: rgb(141, 141, 141);
-    color: rgb(255, 255, 255);
-}
-
-.backbutton {
-    transition-duration: 0.1s;
-}
