@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ab17d96ea55590c4e8a1956723968364
+guid: 227cab213bcb5b7409da4e6cf0da1591
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_0"
+      name: "huvudkarakt\xE4r, walk_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03db54cb21f5cae4caef44a648d096a5
-      internalID: -905530406
+      spriteID: 344a471da5eb32b4b99b9cc4b756c380
+      internalID: 1740405217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_1"
+      name: "huvudkarakt\xE4r, walk_1"
       rect:
         serializedVersion: 2
         x: 32
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b5c4f87bd0394d48960f2b07a01c373
-      internalID: 1495774977
+      spriteID: c7e9fc979007780408929e4491f63fb6
+      internalID: 2041063188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_2"
+      name: "huvudkarakt\xE4r, walk_2"
       rect:
         serializedVersion: 2
         x: 64
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0ed524c3e33def46bae187431920e80
-      internalID: 732423592
+      spriteID: b79b15339102ba547aa7007230b55bc0
+      internalID: -1128383818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_3"
+      name: "huvudkarakt\xE4r, walk_3"
       rect:
         serializedVersion: 2
         x: 96
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd8ff8a3ff4edb64a9284648bd5cc783
-      internalID: 701193951
+      spriteID: bf060d0f4a2174a42a4267182f077f07
+      internalID: 626240427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_4"
+      name: "huvudkarakt\xE4r, walk_4"
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13fac6f7efd5fb74196ce8d23e9b9d6d
-      internalID: 1330574685
+      spriteID: 3435c45bac5e01045ab6acb577ad8e26
+      internalID: -475033589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "huvudkarakt\xE4r, jump_5"
+      name: "huvudkarakt\xE4r, walk_5"
       rect:
         serializedVersion: 2
         x: 32
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e6857484f39f594eb59ef74829c3da7
-      internalID: 1392051851
+      spriteID: a962bef4242ba314ea1740ad11a3adb0
+      internalID: -1516206089
       vertices: []
       indices: 
       edges: []
@@ -233,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "huvudkarakt\xE4r, jump_0": -905530406
-      "huvudkarakt\xE4r, jump_1": 1495774977
-      "huvudkarakt\xE4r, jump_2": 732423592
-      "huvudkarakt\xE4r, jump_3": 701193951
-      "huvudkarakt\xE4r, jump_4": 1330574685
-      "huvudkarakt\xE4r, jump_5": 1392051851
+      "huvudkarakt\xE4r, walk_0": 1740405217
+      "huvudkarakt\xE4r, walk_1": 2041063188
+      "huvudkarakt\xE4r, walk_2": -1128383818
+      "huvudkarakt\xE4r, walk_3": 626240427
+      "huvudkarakt\xE4r, walk_4": -475033589
+      "huvudkarakt\xE4r, walk_5": -1516206089
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
