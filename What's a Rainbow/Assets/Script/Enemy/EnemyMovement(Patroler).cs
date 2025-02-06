@@ -48,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(50f); 
+            yield return new WaitForSeconds(17f); 
 
             ani.SetBool("isIdle", true); 
             Debug.Log("Enemy is now idle!");
