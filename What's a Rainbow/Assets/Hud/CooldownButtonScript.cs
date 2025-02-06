@@ -39,11 +39,11 @@ public class CooldownButtonScript : MonoBehaviour
         while (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime; // Decrease time based on frame rate
-            cooldownText.text = "Cooldown: " + Mathf.Ceil(remainingTime).ToString(); // Update text
+            cooldownText.text = " " + Mathf.Ceil(remainingTime).ToString(); // Update text
             yield return null; // Wait for the next frame
         }
 
-        cooldownText.text = "Cooldown: 0"; // Once cooldown ends, set text to 0
+        cooldownText.text = ""; // Once cooldown ends, set text to 0
         isOnCooldown = false; // Reset cooldown flag
     }
 }
