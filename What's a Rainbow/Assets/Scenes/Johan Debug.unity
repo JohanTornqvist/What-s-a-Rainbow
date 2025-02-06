@@ -141,6 +141,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1412619345140194570, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412619345140194570, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1551057918543801955, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.878495
@@ -180,6 +188,14 @@ PrefabInstance:
     - target: {fileID: 1551057918543801955, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244750819692087739, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244750819692087739, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5224808760604885992, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
       propertyPath: m_Name
@@ -334,7 +350,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
