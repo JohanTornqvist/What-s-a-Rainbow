@@ -18,6 +18,9 @@ public class FadeImageAndText : MonoBehaviour
 
     void Start()
     {
+        // Hide the cursor initially (so it stays under the fade image)
+        Cursor.visible = false;
+
         // Initialize the starting alpha values from the image, text, and header text's current color
         startAlphaImage = fadeImage.color.a;
         if (myText != null)
@@ -69,7 +72,10 @@ public class FadeImageAndText : MonoBehaviour
             }
             else
             {
-                // Disable the image and text once they are fully transparent to allow button interactions
+                // Once the fade is complete, show the cursor again
+                Cursor.visible = true;
+
+                // Disable the image and text once they are fully transparent
                 if (fadeImage.color.a <= 0f)
                 {
                     fadeImage.gameObject.SetActive(false); // Disable the black screen
@@ -88,7 +94,7 @@ public class FadeImageAndText : MonoBehaviour
         }
     }
 
-    // Optional: Start the fade effect
+    // Optional: Start the fade effect manually
     public void StartFade()
     {
         elapsedTime = 0f;
@@ -102,6 +108,9 @@ public class FadeImageAndText : MonoBehaviour
         {
             startAlphaHeader = headerText.color.a;
         }
+
+        // Hide cursor again if fade restarts
+        Cursor.visible = false;
     }
 
     // Set the header text during fade-in (Optional)

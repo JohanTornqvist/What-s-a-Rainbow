@@ -888,7 +888,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    _hoverCursor: {fileID: 2800000, guid: 2da71727b10a36140b27c49b86db23e7, type: 3}
+    _hoverCursor: {fileID: 2800000, guid: 3662e06c8f7f0f541aaf05f3227c2b43, type: 3}
   - _buttonName: QuitButton
     _unityEvent:
       m_PersistentCalls:

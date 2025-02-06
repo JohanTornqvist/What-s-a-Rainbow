@@ -85,12 +85,14 @@ public class ButtonEvent
         // 🔹 Set cursor on hover
         _button.RegisterCallback<PointerEnterEvent>(evt =>
         {
+            // Set the custom hover cursor when entering the button
             UnityEngine.Cursor.SetCursor(_hoverCursor, Vector2.zero, CursorMode.Auto);
         });
 
         // 🔹 Reset cursor on exit
         _button.RegisterCallback<PointerLeaveEvent>(evt =>
         {
+            // Reset to default cursor when the mouse leaves the button
             UnityEngine.Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         });
     }
