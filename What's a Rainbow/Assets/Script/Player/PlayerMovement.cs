@@ -46,6 +46,9 @@ public class playerMovement : MonoBehaviour
     public VolumeProfile huntVolume;
     public VolumeProfile sadVolume;
 
+    Animator ani;
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,7 @@ public class playerMovement : MonoBehaviour
         airTimeTimer = airTime;
         normMoveSpeedSave = moveSpeed;
         rb.gravityScale = playerGravity;
+        ani = GetComponent<Animator>();
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
@@ -63,6 +67,7 @@ public class playerMovement : MonoBehaviour
         {
             moveInput = value.Get<Vector2>();
         }
+        
     }
 
     void OnJump(InputValue value)
@@ -74,7 +79,9 @@ public class playerMovement : MonoBehaviour
             rb.drag = 0f;
             rb.angularDrag = 0f;
             inAir = true;
+            ani.SetBool("isJumping", true);
         }
+        
     }
 
     private void FixedUpdate()
@@ -84,16 +91,26 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
-        if (moveInput != Vector2.zero)
+        if (canMove && moveInput != Vector2.zero && !inAir)
         {
-            if (canMove == true) 
-            {
-               rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-            }
-            
+            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            ani.SetBool("isWalking", true);
+        }
+        else
+        {
+            ani.SetBool("isWalking", false);
         }
 
-        if(inAir == true)
+        if (inAir)
+        {
+            ani.SetBool("isJumping", true);
+        }
+        else
+        {
+            ani.SetBool("isJumping", false);
+        }
+
+        if (inAir == true)
         {
             airTimeTimer -= 0.1f * Time.deltaTime;
             airTimeTimer = Mathf.Clamp(airTimeTimer, 0f, airTime);
@@ -137,3 +154,4 @@ public class playerMovement : MonoBehaviour
         moveSpeed = sadMoveSpeedSave;
     }
 }
+
