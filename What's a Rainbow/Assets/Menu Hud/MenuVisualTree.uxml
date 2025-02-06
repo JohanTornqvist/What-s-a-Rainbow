@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/What&apos;s%20a%20Rainbow.uss?fileID=7433441132597879392&amp;guid=9ae970e631d5f4a42b3d3157e258112e&amp;type=3#What&apos;s a Rainbow" />
     <ui:VisualElement name="Container" style="flex-grow: 1; align-items: center; background-image: none; background-color: rgba(0, 0, 0, 0);">
         <ui:Label tabindex="-1" text="What&apos;s a rainbow" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" style="font-size: 30px;" />
-        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartButton" class="button" style="cursor: url(&quot;project://database/Assets/Menu%20hud/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-6090568113533005507&amp;guid=ffcad06540cb1a34d9f1b001143fa5b2&amp;type=3#check&quot;);" />
+        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartButton" class="button" style="cursor: initial;" />
         <ui:Button text="Setting" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingButton" class="button" />
         <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" />
     </ui:VisualElement>
