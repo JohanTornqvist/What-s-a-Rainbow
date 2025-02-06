@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TheHunter : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class TheHunter : MonoBehaviour
     [SerializeField] private float jumpCooldown = 1.5f;
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private float ledgeCheckDistance = 1.5f;
+    [SerializeField] private float stillTimeThreshold = 3f; // Time before jumping when still
 
     [Header("Layers & Transforms")]
     [SerializeField] private LayerMask groundLayer;
@@ -22,6 +24,9 @@ public class TheHunter : MonoBehaviour
     private bool isGrounded;
     private float lastJumpTime;
     private bool isChasing = true;
+
+    private Vector3 lastPosition;
+    private float stillTime = 0f; // Track how long the hunter has been still
 
     void Start()
     {
@@ -37,11 +42,14 @@ public class TheHunter : MonoBehaviour
         {
             Debug.LogWarning("No GameObject found with the 'Player' tag!");
         }
+
+        lastPosition = transform.position;
     }
 
     void Update()
     {
         CheckIfGrounded();
+        CheckIfStill();
     }
 
     IEnumerator ChasePlayer()
@@ -78,7 +86,7 @@ public class TheHunter : MonoBehaviour
             }
             else
             {
-                MoveTowardsPlayer(); // Adjust X position
+                MoveTowardsPlayer();
             }
             return;
         }
@@ -97,7 +105,7 @@ public class TheHunter : MonoBehaviour
             }
             else
             {
-                MoveTowardsPlayer(); // Adjust X position
+                MoveTowardsPlayer();
             }
             return;
         }
@@ -105,8 +113,6 @@ public class TheHunter : MonoBehaviour
         // Default: Chase the player
         MoveTowardsPlayer();
     }
-
-
 
     void MoveTowardsPlayer()
     {
@@ -123,18 +129,21 @@ public class TheHunter : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         lastJumpTime = Time.time;
+        stillTime = 0f; // Reset still time when jumping
     }
 
     void JumpUp()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         lastJumpTime = Time.time;
+        stillTime = 0f;
     }
 
     void JumpForward()
     {
         rb.velocity = new Vector2(Mathf.Sign(playerTransform.position.x - transform.position.x) * forwardJumpForce, jumpForce * 0.8f);
         lastJumpTime = Time.time;
+        stillTime = 0f;
     }
 
     void MoveToEdgeAndJumpOff()
@@ -144,7 +153,7 @@ public class TheHunter : MonoBehaviour
 
         if (hit.collider == null)
         {
-            Jump(); // Jump off the ledge if there's no ground ahead
+            Jump();
         }
         else
         {
@@ -164,11 +173,30 @@ public class TheHunter : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
+    void CheckIfStill()
+    {
+        if (Vector3.Distance(transform.position, lastPosition) < 0.01f)
+        {
+            stillTime += Time.deltaTime;
+
+            if (stillTime >= stillTimeThreshold)
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            stillTime = 0f; // Reset if moving
+        }
+
+        lastPosition = transform.position;
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Jump(); // Automatically jump when leaving a collider
+            Jump();
         }
     }
 }

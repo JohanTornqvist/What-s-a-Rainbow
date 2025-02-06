@@ -19,6 +19,7 @@ public class Emotion : MonoBehaviour
     public VolumeProfile huntVolume;
     public VolumeProfile sadVolume;
     private ColorAdjustments colorAdjustments;
+    public float fadeDuration = 2f;
 
     private void Start()
     {
@@ -74,6 +75,22 @@ public class Emotion : MonoBehaviour
     {
         globalVolume.profile = sadVolume;
         playerMove.playerState = playerState;
+
+        // Instantly apply the effect at weight 0 and fade in
+        globalVolume.weight = 0f;
+        StartCoroutine(FadeInVolume(globalVolume, fadeDuration));
+    }
+
+    IEnumerator FadeInVolume(Volume volume, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            volume.weight = Mathf.Lerp(0, 1, elapsedTime / duration);
+            yield return null;
+        }
+        volume.weight = 1f; // Ensure it fully fades in
     }
 
     public void SetSaturation(float value)

@@ -711,7 +711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Warning: Flashing light
+  m_text: 'Warning: Flashing Light
 
 '
   m_isRightToLeft: 0
@@ -888,6 +888,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    _hoverCursor: {fileID: 2800000, guid: 2da71727b10a36140b27c49b86db23e7, type: 3}
   - _buttonName: QuitButton
     _unityEvent:
       m_PersistentCalls:
@@ -904,6 +905,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    _hoverCursor: {fileID: 0}
   - _buttonName: BackButton
     _unityEvent:
       m_PersistentCalls:
@@ -920,6 +922,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    _hoverCursor: {fileID: 0}
   - _buttonName: SettingButton
     _unityEvent:
       m_PersistentCalls:
@@ -948,8 +951,10 @@ MonoBehaviour:
             m_StringArgument: SettingsVisualTree
             m_BoolArgument: 0
           m_CallState: 2
+    _hoverCursor: {fileID: 0}
   _volumeSliders: []
   _toggleEvents: []
+  _defaultCursor: {fileID: 0}
 --- !u!1 &2097843883
 GameObject:
   m_ObjectHideFlags: 0
