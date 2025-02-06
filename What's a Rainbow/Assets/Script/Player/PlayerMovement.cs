@@ -84,6 +84,20 @@ public class playerMovement : MonoBehaviour
         
     }
 
+    void OnDash(InputValue value)
+    {
+        if (moveInput == new Vector2(1, 0)) // Check if moveInput is exactly (1, 0)
+        {
+            rb.AddForce(transform.right * 40, ForceMode2D.Impulse);
+        }
+
+        if (moveInput == new Vector2(-1, 0)) // Check if moveInput is exactly (1, 0)
+        {
+            rb.AddForce(transform.right * -40, ForceMode2D.Impulse);
+        }
+    }
+
+
     private void FixedUpdate()
     {
         canJump = rb.IsTouching(groundFilter);
