@@ -9,11 +9,10 @@ public class Killscript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Death"))
         {
+            // add tag death to anything that needs to kill player. Only player should have this script.
             Destroy(gameObject);
             Debug.Log("Compare tag");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
-        
     }
 }
