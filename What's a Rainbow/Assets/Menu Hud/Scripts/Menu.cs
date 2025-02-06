@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,16 +8,10 @@ using UnityEngine.Audio;
 using JetBrains.Annotations;
 
 [System.Serializable]
-public class ClickChange : UnityEvent<ClickEvent>
-{
+public class ClickChange : UnityEvent<ClickEvent> { }
 
-
-}
 [System.Serializable]
-public class BoolChange : UnityEvent<bool>
-{
-
-}
+public class BoolChange : UnityEvent<bool> { }
 
 [System.Serializable]
 public class VolumeSlider
@@ -46,14 +40,13 @@ public class VolumeSlider
     {
         _slider.UnregisterCallback<ChangeEvent<float>>(evt => _audioMixer.SetFloat(_volumeName, evt.newValue - 80));
     }
-
 }
+
 [System.Serializable]
 public class ToggleEvent
 {
     [SerializeField] string _toggleName = "";
     [SerializeField] BoolChange _boolEvent;
-
     Toggle _toggle;
 
     public void Activate(UIDocument document)
@@ -64,14 +57,12 @@ public class ToggleEvent
         }
 
         _toggle.RegisterCallback<ChangeEvent<bool>>(evt => _boolEvent.Invoke(evt.newValue));
-
     }
 
     public void Inactivate(UIDocument document)
     {
         _toggle.UnregisterCallback<ChangeEvent<bool>>(evt => _boolEvent.Invoke(evt.newValue));
     }
-
 }
 
 [System.Serializable]
@@ -79,6 +70,7 @@ public class ButtonEvent
 {
     [SerializeField] string _buttonName = "";
     [SerializeField] UnityEvent _unityEvent;
+    [SerializeField] Texture2D _hoverCursor; // Cursor on hover
     Button _button;
 
     public void Activate(UIDocument document)
@@ -88,19 +80,26 @@ public class ButtonEvent
             _button = document.rootVisualElement.Q<Button>(_buttonName);
         }
 
-
         _button.clicked += _unityEvent.Invoke;
+
+        // 🔹 Set cursor on hover
+        _button.RegisterCallback<PointerEnterEvent>(evt =>
+        {
+            UnityEngine.Cursor.SetCursor(_hoverCursor, Vector2.zero, CursorMode.Auto);
+        });
+
+        // 🔹 Reset cursor on exit
+        _button.RegisterCallback<PointerLeaveEvent>(evt =>
+        {
+            UnityEngine.Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        });
     }
 
     public void Inactivate(UIDocument document)
     {
         _button.clicked -= _unityEvent.Invoke;
     }
-
 }
-
-
-
 
 public class Menu : MonoBehaviour
 {
@@ -108,8 +107,15 @@ public class Menu : MonoBehaviour
     [SerializeField] List<ButtonEvent> _buttonEvents;
     [SerializeField] List<VolumeSlider> _volumeSliders;
     [SerializeField] List<ToggleEvent> _toggleEvents;
+    [SerializeField] Texture2D _defaultCursor; // Default cursor
 
     VisualElement _curMenu = null;
+
+    private void Start()
+    {
+        // 🔹 Set default cursor when the menu starts
+        UnityEngine.Cursor.SetCursor(_defaultCursor, Vector2.zero, CursorMode.Auto);
+    }
 
     public void SwitchMenu(string menuName)
     {
@@ -123,9 +129,10 @@ public class Menu : MonoBehaviour
 
     public void LoadScene(int buildIndex)
     {
+        // 🔹 Reset cursor before switching scenes
+        UnityEngine.Cursor.SetCursor(_defaultCursor, Vector2.zero, CursorMode.Auto);
         SceneManager.LoadScene(buildIndex);
     }
-
 
     public void Quit()
     {
@@ -136,14 +143,12 @@ public class Menu : MonoBehaviour
 #endif
     }
 
-
     private void OnEnable()
     {
         _buttonEvents.ForEach(button => button.Activate(_document));
         _volumeSliders.ForEach(button => button.Activate(_document));
         _toggleEvents.ForEach(button => button.Activate(_document));
     }
-
 
     private void OnDisable()
     {
