@@ -5,14 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyMovementChaser : MonoBehaviour
 {
-    /* 
-     * There was once a script whose purpose was to make the player move. This is not that script.
-     * Instead, its purpose is to make the player's opponent move, and its name is Enemy.
-     * TLDR Its the Enemys movement Script
-     */
-
     [SerializeField] float moveSpeed = 17f;
-    [SerializeField] float moveDuration = 7f; // Time before the enemy destroys itself
+    [SerializeField] float moveDuration = 2f; // Time before the enemy destroys itself
 
     Rigidbody2D rb;
     GameObject player;
@@ -22,15 +16,17 @@ public class EnemyMovementChaser : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+
+        rb.gravityScale = 1; // Ensure gravity is enabled
     }
 
     void Update()
     {
         if (shouldMove && player != null)
         {
-            // Move towards the player
+            // Move towards the player using velocity
             Vector2 direction = (player.transform.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y); // Keep gravity effect
         }
     }
 
