@@ -19,8 +19,13 @@ public class Killscript : MonoBehaviour
         {
             StartCoroutine(Die());
         }
-    }
 
+        if (collision.gameObject.CompareTag("InstaDeath"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        }
+    }
     IEnumerator Die()
     {
         ani.SetBool("isDead", true);
