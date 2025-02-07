@@ -23,6 +23,7 @@ public class BetterMovingPlatform : MonoBehaviour
         {
             moveDiretion = true;
         }
+        
     }
 
     void FixedUpdate()

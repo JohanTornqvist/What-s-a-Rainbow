@@ -14,12 +14,11 @@ public class Killscript : MonoBehaviour
 
     public void StartDeathSequence()
     {
-
-        if (collision.gameObject.CompareTag("Death"))
-        {
             StartCoroutine(Die());
-        }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("InstaDeath"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
