@@ -1,171 +1,128 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class playerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public Vector2 moveInput;
     public Rigidbody2D rb;
     [SerializeField] Collider2D playerCollider;
-    [SerializeField] GameObject player;
+    [SerializeField] Collider2D playerJumpBox;
     public int playerState = 0;
     public Emotion emotionControler;
 
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float jumpPower = 10f;
-    [SerializeField] float airTime = 1f;
-    [SerializeField] float linDrag = 1f;
-    [SerializeField] float angleDrag = 1f;
-    [SerializeField] bool inAir = false;
-    public float airTimeTimer = 0f;
-    public float gravityTranstion = 1f;
-    [SerializeField] float playerGravity = 10f;
 
     [Header("Ground Check:")]
     [SerializeField] ContactFilter2D groundFilter;
 
-    [Header("Movment Toggles:")]
+    [Header("Movement Toggles:")]
     public bool canMove = true;
     public bool canJump = false;
     public bool hasDash = false;
-    public bool hasWallJump = false;
-    public bool hasDoubleJump = false;
 
     [Header("State saves:")]
-    public float normMoveSpeedSave;
-    public float huntMoveSpeedSave = 0;
-    public float sadMoveSpeedSave = 0;
-    public Volume globalVolume;
-    public VolumeProfile normVolume;
-    public VolumeProfile huntVolume;
-    public VolumeProfile sadVolume;
+    private float normMoveSpeedSave;
+    private float huntMoveSpeedSave = 0;
+    private float sadMoveSpeedSave = 0;
 
-    Animator ani;
-   
+    private Animator ani;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        airTimeTimer = airTime;
         normMoveSpeedSave = moveSpeed;
-        rb.gravityScale = playerGravity;
         ani = GetComponent<Animator>();
 
-        GameObject Emotion = GameObject.FindWithTag("EmotionControle");
-        emotionControler = Emotion.GetComponent<Emotion>();
+        GameObject emotionObject = GameObject.FindWithTag("EmotionControle");
+        if (emotionObject != null)
+        {
+            emotionControler = emotionObject.GetComponent<Emotion>();
+        }
     }
+
     void OnMove(InputValue value)
     {
-        if (canMove == true)
+        if (canMove)
         {
             moveInput = value.Get<Vector2>();
         }
-        
     }
+
+    //void OnJump(InputValue value)
+   // {
+     //   if (canJump == true)
+       // {
+       //     rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        //    ani.SetBool("isJumping", true);
+        //}
+        //}
 
     void OnJump(InputValue value)
     {
         if (canJump == true)
         {
             rb.velocity += new Vector2(0, jumpPower);
-            rb.gravityScale = 0f;
-            rb.drag = 0f;
-            rb.angularDrag = 0f;
-            inAir = true;
-            ani.SetBool("isJumping", true);
         }
-        
     }
 
     void OnDash(InputValue value)
     {
-        if (moveInput == new Vector2(1, 0)) // Check if moveInput is exactly (1, 0)
-        {
-            rb.AddForce(transform.right * 40, ForceMode2D.Impulse);
-        }
+        if (!hasDash) return; // Ensure dash is unlocked
 
-        if (moveInput == new Vector2(-1, 0)) // Check if moveInput is exactly (1, 0)
+        if (Mathf.Abs(moveInput.x) > 0.1f) // Avoid floating-point errors
         {
-            rb.AddForce(transform.right * -40, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(moveInput.x * 40, rb.velocity.y);
         }
     }
-
 
     private void FixedUpdate()
     {
-        canJump = rb.IsTouching(groundFilter);
+        // Constantly check if player is on the ground
+        canJump = playerJumpBox.IsTouching(groundFilter);
+        MovePlayer();
     }
 
-    void Update()
+    void MovePlayer()
     {
-        if (canMove && moveInput != Vector2.zero && !inAir)
+        if (!canMove) return;
+
+        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+
+        if (moveInput.x != 0)
         {
-            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             ani.SetBool("isWalking", true);
+            transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1); // Flip player sprite
         }
         else
         {
             ani.SetBool("isWalking", false);
         }
+    }
 
-        if (inAir)
-        {
-            ani.SetBool("isJumping", true);
-        }
-        else
-        {
-            ani.SetBool("isJumping", false);
-        }
-
-        if (inAir == true)
-        {
-            airTimeTimer -= 0.1f * Time.deltaTime;
-            airTimeTimer = Mathf.Clamp(airTimeTimer, 0f, airTime);
-        }
-
-        if (airTimeTimer <= 0f)
-        {   
-            inAir = false;
-            airTimeTimer = airTime;
-            rb.gravityScale = playerGravity;
-            rb.drag = linDrag;
-            rb.angularDrag = angleDrag;
-        }
+    void Update()
+    {
+        ani.SetBool("isJumping", !canJump); // Automatically update jump animation
 
         switch (playerState)
         {
             case 0:
-                normal();
+                Normal();
                 break;
             case 1:
-                hunting();
+                Hunting();
                 break;
             case 2:
-                sad();
+                Sad();
                 break;
         }
     }
 
-    void normal()
-    {
-        moveSpeed = normMoveSpeedSave;
-    }
-
-    void hunting()
-    {
-        moveSpeed = huntMoveSpeedSave;
-    }
-
-    void sad()
-    {
-        moveSpeed = sadMoveSpeedSave;
-    }
+    void Normal() => moveSpeed = normMoveSpeedSave;
+    void Hunting() => moveSpeed = huntMoveSpeedSave;
+    void Sad() => moveSpeed = sadMoveSpeedSave;
 }
-

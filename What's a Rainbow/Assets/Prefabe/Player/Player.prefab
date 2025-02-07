@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7582597536448015061}
   - component: {fileID: 451792102159267794}
   - component: {fileID: 6009851501392822093}
+  - component: {fileID: 7514933211671351544}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1956940288, guid: c54c5482d16e23442b022c9720936795, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -108,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1000
   m_LinearDrag: 28.2
   m_AngularDrag: 40.97
-  m_GravityScale: 100
+  m_GravityScale: 12.64
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -169,10 +170,16 @@ PolygonCollider2D:
       - {x: -0.2242279, y: 0.069844246}
       - {x: -0.2609558, y: -0.05465746}
       - {x: -0.3125, y: -0.8125}
-      - {x: -0.15625, y: -1}
-      - {x: -0.1410141, y: -1.0036917}
-      - {x: 0.24938583, y: -1.002461}
-      - {x: 0.25, y: -1}
+      - {x: -0.23508811, y: -0.9027319}
+      - {x: -0.2017858, y: -0.93107486}
+      - {x: -0.17504722, y: -0.9392307}
+      - {x: -0.14787799, y: -0.958261}
+      - {x: -0.123434186, y: -0.9655843}
+      - {x: 0.039839268, y: -0.9703281}
+      - {x: 0.24369156, y: -0.97040343}
+      - {x: 0.26332033, y: -0.9663079}
+      - {x: 0.28832567, y: -0.9554038}
+      - {x: 0.34160018, y: -0.933568}
       - {x: 0.375, y: -0.75}
       - {x: 0.375, y: -0.375}
       - {x: 0.26929474, y: 0.07059193}
@@ -222,18 +229,11 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   rb: {fileID: 3966367285131494107}
   playerCollider: {fileID: 4413651958475689337}
-  player: {fileID: 4691193331072622238}
+  playerJumpBox: {fileID: 7514933211671351544}
   playerState: 0
   emotionControler: {fileID: 0}
   moveSpeed: 13.87
   jumpPower: 8.8
-  airTime: 0.03
-  linDrag: 4.12
-  angleDrag: 4.27
-  inAir: 0
-  airTimeTimer: 0
-  gravityTranstion: 0.65
-  playerGravity: 11.3
   groundFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -251,15 +251,6 @@ MonoBehaviour:
   canMove: 1
   canJump: 1
   hasDash: 0
-  hasWallJump: 0
-  hasDoubleJump: 0
-  normMoveSpeedSave: 14
-  huntMoveSpeedSave: 20
-  sadMoveSpeedSave: 7
-  globalVolume: {fileID: 0}
-  normVolume: {fileID: 11400000, guid: e7c5eda36ea9b1a498840585df38abaa, type: 2}
-  huntVolume: {fileID: 11400000, guid: e6c80c820a6773349bc6caad6376f584, type: 2}
-  sadVolume: {fileID: 11400000, guid: 50f9828d74be11d4ebb9328c657812c7, type: 2}
 --- !u!82 &4613600515255562313
 AudioSource:
   m_ObjectHideFlags: 0
@@ -428,3 +419,48 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &7514933211671351544
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010004312, y: -0.99435854}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7775089, y: 0.017661572}
+  m_EdgeRadius: 0
