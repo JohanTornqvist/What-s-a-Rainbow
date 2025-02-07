@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 4613600515255562313}
   - component: {fileID: 3430262830771285835}
   - component: {fileID: 7582597536448015061}
+  - component: {fileID: 451792102159267794}
+  - component: {fileID: 6009851501392822093}
+  - component: {fileID: 7514933211671351544}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -34,7 +37,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4846742, y: -2.43, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,9 +82,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.052934766, g: 1, b: 0, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1956940288, guid: c54c5482d16e23442b022c9720936795, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,10 +106,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 28.2
   m_AngularDrag: 40.97
-  m_GravityScale: 45.44
+  m_GravityScale: 12.64
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -154,7 +157,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -162,10 +165,24 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
+    - - {x: 0.21302414, y: 0.19011402}
+      - {x: -0.19272614, y: 0.17865992}
+      - {x: -0.2242279, y: 0.069844246}
+      - {x: -0.2609558, y: -0.05465746}
+      - {x: -0.3125, y: -0.8125}
+      - {x: -0.23508811, y: -0.9027319}
+      - {x: -0.2017858, y: -0.93107486}
+      - {x: -0.17504722, y: -0.9392307}
+      - {x: -0.14787799, y: -0.958261}
+      - {x: -0.123434186, y: -0.9655843}
+      - {x: 0.039839268, y: -0.9703281}
+      - {x: 0.24369156, y: -0.97040343}
+      - {x: 0.26332033, y: -0.9663079}
+      - {x: 0.28832567, y: -0.9554038}
+      - {x: 0.34160018, y: -0.933568}
+      - {x: 0.375, y: -0.75}
+      - {x: 0.375, y: -0.375}
+      - {x: 0.26929474, y: 0.07059193}
   m_UseDelaunayMesh: 0
 --- !u!114 &3904651099320909819
 MonoBehaviour:
@@ -212,18 +229,11 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   rb: {fileID: 3966367285131494107}
   playerCollider: {fileID: 4413651958475689337}
-  player: {fileID: 4691193331072622238}
+  playerJumpBox: {fileID: 7514933211671351544}
   playerState: 0
   emotionControler: {fileID: 0}
   moveSpeed: 13.87
   jumpPower: 8.8
-  airTime: 0.03
-  linDrag: 4.12
-  angleDrag: 4.27
-  inAir: 0
-  airTimeTimer: 0
-  gravityTranstion: 0.65
-  playerGravity: 11.3
   groundFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -241,15 +251,6 @@ MonoBehaviour:
   canMove: 1
   canJump: 1
   hasDash: 0
-  hasWallJump: 0
-  hasDoubleJump: 0
-  normMoveSpeedSave: 14
-  huntMoveSpeedSave: 20
-  sadMoveSpeedSave: 7
-  globalVolume: {fileID: 0}
-  normVolume: {fileID: 11400000, guid: e7c5eda36ea9b1a498840585df38abaa, type: 2}
-  huntVolume: {fileID: 11400000, guid: e6c80c820a6773349bc6caad6376f584, type: 2}
-  sadVolume: {fileID: 11400000, guid: 50f9828d74be11d4ebb9328c657812c7, type: 2}
 --- !u!82 &4613600515255562313
 AudioSource:
   m_ObjectHideFlags: 0
@@ -382,3 +383,83 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 165fe9b278a2f8249b4b11b31a0a5920, type: 3}
   - {fileID: 8300000, guid: 22ce453df62c54f4f94bc550f3899d08, type: 3}
   - {fileID: 8300000, guid: 22ce453df62c54f4f94bc550f3899d08, type: 3}
+--- !u!114 &451792102159267794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a2ede8169ce424e8dcf6fb4bb856cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackInterval: 0.1
+  maxPositions: 100
+--- !u!95 &6009851501392822093
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b5cc48c026a8bd479191baaebc915e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &7514933211671351544
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010004312, y: -0.99435854}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7775089, y: 0.017661572}
+  m_EdgeRadius: 0

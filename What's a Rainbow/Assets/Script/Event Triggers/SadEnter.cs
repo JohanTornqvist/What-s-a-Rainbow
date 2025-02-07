@@ -15,7 +15,10 @@ public class SadEnter : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        emotionControler.playerState = 2;
+        if (other.CompareTag("Player")) // Ensure the Player has the correct tag
+        {
+            emotionControler.playerState = 2;
+        }
     }
 
     private void Update()

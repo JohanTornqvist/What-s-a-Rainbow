@@ -1,34 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SadExit : MonoBehaviour
 {
     [SerializeField] private Collider2D trigger;
+    public Volume globalVolume;
     public Emotion emotionControler;
+    public PlayerMovement playerMove;
+    public Hunt_Audio_Controler huntAudio;
 
-
-    void Start()
+    private void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        playerMove = player.GetComponent<PlayerMovement>();
+        huntAudio = player.GetComponent<Hunt_Audio_Controler>();
+
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        emotionControler.playerState = 0;
-
+        if (other.CompareTag("Player")) // Make sure the Player has the correct tag
+        {
+            emotionControler.playerState = 0;  // Set the player state
+        }
     }
 
-    private void Update()
+    public void Update()
     {
-        if (emotionControler.playerState == 0)
+        if (playerMove.playerState == 0)
         {
-            if (trigger != null)
-                trigger.enabled = false;
+            trigger.enabled = false;
         }
-        else if (trigger != null)
-        {
-            trigger.enabled = true;
-        }
+        else trigger.enabled = true;
     }
 }
