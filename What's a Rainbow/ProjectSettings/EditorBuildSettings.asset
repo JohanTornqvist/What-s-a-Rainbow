@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LSD World.unity
     guid: 2f6e8ce95ba7d484f95db526c8f09616
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Debug (Marcus).unity
     guid: c3c45ca85af77664280ab0065142f12a
   m_configObjects: {}
