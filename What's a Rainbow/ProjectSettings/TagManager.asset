@@ -8,6 +8,7 @@ TagManager:
   - EmotionControle
   - HuntEnter
   - HunterTracker
+  - TheHuterKill
   layers:
   - Default
   - TransparentFX
