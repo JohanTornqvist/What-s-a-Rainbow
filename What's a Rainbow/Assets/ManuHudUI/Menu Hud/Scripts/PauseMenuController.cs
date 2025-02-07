@@ -14,6 +14,8 @@ public class PauseMenuController : MonoBehaviour
 
     private VisualElement pauseMenu;
     private VisualElement blurredBackground;
+    private VisualElement background; // Updated for new background visual element
+    private Label pauseLabel; // Updated to reference the "Pause" label
     private Button quitButton;
     private bool isPaused = false;
 
@@ -22,7 +24,9 @@ public class PauseMenuController : MonoBehaviour
         var root = pauseMenuDocument.rootVisualElement;
         pauseMenu = root.Q<VisualElement>("popupWindow");
         blurredBackground = root.Q<VisualElement>("blurredBackground");
-        quitButton = root.Q<Button>("quitButton"); // Get Quit Button
+        background = root.Q<VisualElement>("background"); // Get background
+        pauseLabel = root.Q<Label>("Pause"); // Get the "Pause" label
+        quitButton = root.Q<Button>("quitButton");
 
         if (quitButton != null)
         {
@@ -33,9 +37,11 @@ public class PauseMenuController : MonoBehaviour
             Debug.LogError("❌ Quit Button not found in UI Document!");
         }
 
-        // Ensure the pause menu is hidden when the game starts
+        // Ensure the pause menu and other UI elements are hidden initially
         pauseMenu.style.display = DisplayStyle.None;
         blurredBackground.style.display = DisplayStyle.None;
+        background.style.display = DisplayStyle.None;
+        pauseLabel.style.display = DisplayStyle.None;
     }
 
     private void Update()
@@ -57,8 +63,14 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 0;
         isPaused = true;
+
+        // Show the pause menu and related UI elements
         pauseMenu.style.display = DisplayStyle.Flex;
         blurredBackground.style.display = DisplayStyle.Flex;
+        background.style.display = DisplayStyle.Flex;
+        pauseLabel.style.display = DisplayStyle.Flex; // Show the Pause label
+
+        // Activate button events for Pause Menu
         pauseButtonEvents.ForEach(button => button.Activate(pauseMenuDocument));
     }
 
@@ -66,8 +78,14 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+
+        // Hide the pause menu and related UI elements
         pauseMenu.style.display = DisplayStyle.None;
         blurredBackground.style.display = DisplayStyle.None;
+        background.style.display = DisplayStyle.None;
+        pauseLabel.style.display = DisplayStyle.None; // Hide the Pause label
+
+        // Deactivate button events
         pauseButtonEvents.ForEach(button => button.Inactivate(pauseMenuDocument));
     }
 
