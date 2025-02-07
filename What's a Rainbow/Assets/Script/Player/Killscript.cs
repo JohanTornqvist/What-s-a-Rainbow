@@ -23,7 +23,13 @@ public class Killscript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            StartCoroutine(Die());
+        }
     }
+    
 
     IEnumerator Die()
     {
