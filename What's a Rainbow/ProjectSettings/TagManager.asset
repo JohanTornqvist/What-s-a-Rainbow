@@ -9,6 +9,7 @@ TagManager:
   - HuntEnter
   - HunterTracker
   - Ground
+  - TheHunterKill
   layers:
   - Default
   - TransparentFX

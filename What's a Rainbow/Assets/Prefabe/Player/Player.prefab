@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 1000
   m_LinearDrag: 28.2
   m_AngularDrag: 40.97
   m_GravityScale: 12.64
@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathAnimationDuration: 2.97
 --- !u!114 &7582597536448015061
 MonoBehaviour:
   m_ObjectHideFlags: 0
