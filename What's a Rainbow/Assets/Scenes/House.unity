@@ -969,7 +969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuDocument: {fileID: 680002137}
   pauseButtonEvents: []
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: a1a588628d574374ab9e4a36bf34e3e4, type: 2}
   volumeName: MasterVolume
 --- !u!4 &1796098360
 Transform:
