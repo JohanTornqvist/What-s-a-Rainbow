@@ -11,11 +11,13 @@ public class EnemyMovementChaser : MonoBehaviour
     Rigidbody2D rb;
     GameObject player;
     bool shouldMove = false;
+    Animator ani;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+        ani = GetComponent<Animator>(); // Get Animator component
 
         rb.gravityScale = 1; // Ensure gravity is enabled
     }
@@ -26,7 +28,13 @@ public class EnemyMovementChaser : MonoBehaviour
         {
             // Move towards the player using velocity
             Vector2 direction = (player.transform.position - transform.position).normalized;
-            rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y); // Keep gravity effect
+            rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y); 
+
+            ani.SetBool("isRuning", true); 
+        }
+        else
+        {
+            ani.SetBool("isRuning", false); 
         }
     }
 
@@ -35,14 +43,14 @@ public class EnemyMovementChaser : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             shouldMove = true;
-            StopAllCoroutines(); // Stop any previous stop timer (prevents conflicts)
-            StartCoroutine(DestroyAfterDelay()); // Start countdown to destroy
+            StopAllCoroutines(); 
+            StartCoroutine(DestroyAfterDelay()); 
         }
     }
 
     IEnumerator DestroyAfterDelay()
     {
         yield return new WaitForSeconds(moveDuration);
-        Destroy(gameObject); // Destroy the enemy after the delay
+        Destroy(gameObject); 
     }
 }
