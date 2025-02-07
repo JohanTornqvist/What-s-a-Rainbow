@@ -8,13 +8,13 @@ public class SadExit : MonoBehaviour
     [SerializeField] private Collider2D trigger;
     public Volume globalVolume;
     public Emotion emotionControler;
-    public playerMovement playerMove;
+    public PlayerMovement playerMove;
     public Hunt_Audio_Controler huntAudio;
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        playerMove = player.GetComponent<playerMovement>();
+        playerMove = player.GetComponent<PlayerMovement>();
         huntAudio = player.GetComponent<Hunt_Audio_Controler>();
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");

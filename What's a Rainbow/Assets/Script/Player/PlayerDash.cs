@@ -11,12 +11,12 @@ public class PlayerDash : MonoBehaviour
     public Vector2 moveInput;
     public float dashSpeed = 20f;
 
-    public playerMovement playerMovement; // Reference to PlayerMovement
+    public PlayerMovement playerMovement; // Reference to PlayerMovement
 
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
-        playerMovement = player.GetComponent<playerMovement>(); // Get PlayerMovement from the same GameObject
+        playerMovement = player.GetComponent<PlayerMovement>(); // Get PlayerMovement from the same GameObject
     }
 
     private void Update()

@@ -10,12 +10,12 @@ public class HuntEnterScript : MonoBehaviour
     public Emotion emotionControler;
     public AudioSource audioSource;
     public AudioClip audio_hunt;
-    public playerMovement playerMove;
+    public PlayerMovement playerMove;
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        playerMove = player.GetComponent<playerMovement>();
+        playerMove = player.GetComponent<PlayerMovement>();
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
