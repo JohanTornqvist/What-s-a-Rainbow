@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,12 +8,17 @@ public class TheHunterKill : MonoBehaviour
     {
         if (collision.CompareTag("Death"))
         {
-            Destroy(collision.gameObject); 
+            Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Player"))
         {
-            Destroy(collision.gameObject); 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+            Killscript killScript = collision.GetComponent<Killscript>(); // Get the Killscript on the player
+
+            if (killScript != null)
+            {
+                killScript.StartDeathSequence(); // Call the method in Killscript
+            }
         }
     }
 }
+
