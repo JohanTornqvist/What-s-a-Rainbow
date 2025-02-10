@@ -2164,15 +2164,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1740153787165007714, guid: a47cc2e9115ecfe42a380dc7f4b38420, type: 3}
       propertyPath: playerState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2291675454228361848, guid: a47cc2e9115ecfe42a380dc7f4b38420, type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 22e851bbb365c2a43864ac603370386c, type: 2}
     - target: {fileID: 8374639154371731321, guid: a47cc2e9115ecfe42a380dc7f4b38420, type: 3}
       propertyPath: m_Name
       value: Global Volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374639154371731321, guid: a47cc2e9115ecfe42a380dc7f4b38420, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8608783752548264375, guid: a47cc2e9115ecfe42a380dc7f4b38420, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2521,6 +2525,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 529037226391069386, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1ee519b161cf7ae48a3f7aa2293e3d2d, type: 2}
     - target: {fileID: 1412619345140194570, guid: bba72407e0368714bb13aa312ca3055a, type: 3}
       propertyPath: m_Size.x
       value: 0.20291519

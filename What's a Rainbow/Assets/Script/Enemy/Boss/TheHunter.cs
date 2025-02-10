@@ -12,7 +12,7 @@ public class TheHunter : MonoBehaviour
     [SerializeField] private float jumpCooldown = 1.5f;
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private float ledgeCheckDistance = 1.5f;
-    [SerializeField] private float stillTimeThreshold = 3f; // Time before jumping when still
+    [SerializeField] private float stillTimeThreshold = 3f;
 
     [Header("Layers & Transforms")]
     [SerializeField] private LayerMask groundLayer;
@@ -24,13 +24,15 @@ public class TheHunter : MonoBehaviour
     private bool isGrounded;
     private float lastJumpTime;
     private bool isChasing = true;
+    private Animator ani;
 
     private Vector3 lastPosition;
-    private float stillTime = 0f; 
+    private float stillTime = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>(); // Ensure the Animator is initialized
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -40,7 +42,7 @@ public class TheHunter : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning(" WHAT do you MEAN There are NO PREY?!!!  ");
+            Debug.LogWarning("WHAT do you MEAN There are NO PREY?!!!");
         }
 
         lastPosition = transform.position;
@@ -50,6 +52,9 @@ public class TheHunter : MonoBehaviour
     {
         CheckIfGrounded();
         CheckIfStill();
+
+        // Update the "isHunting" parameter based on the isChasing bool.
+        ani.SetBool("isHunting", isChasing);
     }
 
     IEnumerator ChasePlayer()
