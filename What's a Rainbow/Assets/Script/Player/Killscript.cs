@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 public class Killscript : MonoBehaviour
 {
     Animator ani;
-    [SerializeField] float deathAnimationDuration = 2f; 
+    [SerializeField] float deathAnimationDuration = 2f;
+    public Collider2D playerCollider;
+    public GameObject player;
+    private PlayerMovement playerMovement; // Reference to PlayerMovement script
 
     void Start()
     {
         ani = GetComponent<Animator>();
+        player = GameObject.FindWithTag("Player");
+        playerCollider = player.GetComponent<Collider2D>();
+        playerMovement = player.GetComponent<PlayerMovement>(); // Get PlayerMovement script
     }
 
     public void StartDeathSequence()
     {
-            StartCoroutine(Die());
+        StartCoroutine(Die());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -29,13 +35,18 @@ public class Killscript : MonoBehaviour
             StartCoroutine(Die());
         }
     }
-    
 
-    IEnumerator Die()
+    public IEnumerator Die()
     {
         ani.SetBool("isDead", true);
-        yield return new WaitForSeconds(deathAnimationDuration);
-        Destroy(gameObject); 
+        yield return new WaitForSeconds(0.2f); 
+        if (playerMovement != null)
+        {
+            playerMovement.canMove = false;
+            playerMovement.canJump = false;
+        }
+        playerCollider.enabled = false;
+        yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

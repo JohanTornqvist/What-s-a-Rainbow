@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - TheHunterKill
   - InstaDeath
+  - DashIgnore
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Enemy
   - 
-  - 
+  - dashIgnore
   - 
   - 
   - 

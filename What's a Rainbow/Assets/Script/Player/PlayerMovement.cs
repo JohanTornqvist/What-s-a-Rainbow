@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float jumpPower = 10f;
+    [SerializeField] int jumpAmount = 1;
+    public int jumpsLeft;
 
     [Header("Ground Check:")]
     [SerializeField] ContactFilter2D groundFilter;
@@ -24,11 +27,12 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public bool canJump = false;
     public bool hasDash = false;
+    public bool hasDubbleJump = false;
 
     [Header("State saves:")]
-    private float normMoveSpeedSave;
-    private float huntMoveSpeedSave = 0;
-    private float sadMoveSpeedSave = 0;
+    public float normMoveSpeedSave;
+    public float huntMoveSpeedSave = 0;
+    public float sadMoveSpeedSave = 0;
 
     private Animator ani;
 
@@ -43,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             emotionControler = emotionObject.GetComponent<Emotion>();
         }
+        jumpsLeft = jumpAmount;
     }
 
     void OnMove(InputValue value)
@@ -53,37 +58,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //void OnJump(InputValue value)
-   // {
-     //   if (canJump == true)
-       // {
-       //     rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        //    ani.SetBool("isJumping", true);
-        //}
-        //}
-
     void OnJump(InputValue value)
     {
-        if (canJump == true)
+        if (canJump == true || canJump == false && jumpsLeft >= jumpAmount)
         {
             rb.velocity += new Vector2(0, jumpPower);
-        }
-    }
-
-    void OnDash(InputValue value)
-    {
-        if (!hasDash) return; // Ensure dash is unlocked
-
-        if (Mathf.Abs(moveInput.x) > 0.1f) // Avoid floating-point errors
-        {
-            rb.velocity = new Vector2(moveInput.x * 40, rb.velocity.y);
+            if(canJump == false && jumpsLeft >= jumpAmount)
+            {
+                jumpsLeft -= 1;
+            }
         }
     }
 
     private void FixedUpdate()
     {
         // Constantly check if player is on the ground
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         canJump = playerJumpBox.IsTouching(groundFilter);
+        //Debug.Log(canJump);
         MovePlayer();
     }
 
