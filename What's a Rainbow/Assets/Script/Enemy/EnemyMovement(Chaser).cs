@@ -30,11 +30,11 @@ public class EnemyMovementChaser : MonoBehaviour
             Vector2 direction = (player.transform.position - transform.position).normalized;
             rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y); 
 
-            ani.SetBool("isRuning", true); 
+            ani.SetBool("isEnemyRuning", true); 
         }
         else
         {
-            ani.SetBool("isRuning", false); 
+            ani.SetBool("isEnemyRuning", false); 
         }
     }
 

@@ -8,8 +8,6 @@ using UnityEngine.Rendering.Universal;
 
 public class Emotion : MonoBehaviour
 {
-
-
     public PlayerMovement playerMove;
     public Hunt_Audio_Controler huntAudio;
     public int playerState = 0;
@@ -27,6 +25,7 @@ public class Emotion : MonoBehaviour
         playerMove = player.GetComponent<PlayerMovement>();
         huntAudio = player.GetComponent<Hunt_Audio_Controler>();
     }
+
     void Update()
     {
         switch (playerState)
@@ -41,6 +40,7 @@ public class Emotion : MonoBehaviour
                 sad();
                 break;
         }
+
     }
 
     void normal()
@@ -55,10 +55,11 @@ public class Emotion : MonoBehaviour
         playerMove.playerState = playerState;
         huntAudio.playerState = playerState;
 
+        // You can also place other hunting-specific logic here.
         if (globalVolume.profile.TryGet(out ColorAdjustments colorAdjustments))
         {
             colorAdjustments.postExposure.value = -1.8f; // Instantly darken
-            StartCoroutine(RestoreExposure(colorAdjustments, 2f)); // Restore after 1 second
+            StartCoroutine(RestoreExposure(colorAdjustments, 2f)); // Restore after 2 seconds
         }
     }
 
@@ -66,10 +67,7 @@ public class Emotion : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         colorAdjustments.postExposure.value = 4.35f; // Restore exposure
-
     }
-
-
 
     void sad()
     {
@@ -95,9 +93,10 @@ public class Emotion : MonoBehaviour
 
     public void SetSaturation(float value)
     {
-            colorAdjustments.saturation.value = value;
-
+        // Make sure that 'colorAdjustments' is properly set beforehand.
+        colorAdjustments.saturation.value = value;
     }
+
+    // This method updates the running animation based on the player's state.
+   
 }
-
-
