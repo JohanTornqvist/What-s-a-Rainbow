@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ManuHudUI/What&apos;s%20a%20Rainbow.uss?fileID=7433441132597879392&amp;guid=9ae970e631d5f4a42b3d3157e258112e&amp;type=3#What&apos;s a Rainbow" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; align-self: stretch; justify-content: center; align-items: stretch; background-color: rgba(101, 0, 0, 0.56);">
+        <ui:Label tabindex="-1" text="You die" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeathLabel" class="header" style="-unity-text-align: upper-center; width: auto; height: 65px; white-space: nowrap; font-size: 40px;" />
+        <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; align-self: stretch; flex-direction: row; align-items: center; height: 1px; justify-content: center; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; max-height: 300px;">
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="height: 92px; width: 163px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; font-size: 30px;" />
+            <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RestartButton" class="button" style="height: 92px; width: 163px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; font-size: 30px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
