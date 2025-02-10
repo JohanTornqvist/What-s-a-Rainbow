@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 public class Killscript : MonoBehaviour
 {
     Animator ani;
-    [SerializeField] float deathAnimationDuration = 2f; 
+    [SerializeField] float deathAnimationDuration = 2f;
+    public Collider2D playerCollider;
+    public GameObject player;
 
     void Start()
     {
         ani = GetComponent<Animator>();
+        GameObject player = GameObject.FindWithTag("Player");
+        playerCollider = player.GetComponent<Collider2D>();
     }
 
     public void StartDeathSequence()
@@ -34,6 +38,7 @@ public class Killscript : MonoBehaviour
     IEnumerator Die()
     {
         ani.SetBool("isDead", true);
+        playerCollider.enabled = false;
         yield return new WaitForSeconds(deathAnimationDuration);
         Destroy(gameObject); 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
