@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 1659dd3ae1f0da74b82ea397ca8e59f5
+guid: 6472eabd7d122de46b32d15bf7422d04
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spider lady, sprint_0
+      name: spider lady, idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0208b68474f0d5b4999aa4bb14fa2298
-      internalID: 38826875
+      spriteID: f813b94cbf70a2648962262a206ce787
+      internalID: -822919614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider lady, sprint_1
+      name: spider lady, idle_1
       rect:
         serializedVersion: 2
         x: 64
@@ -126,20 +126,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ea1ef50878069746a4c13a9d39cc689
-      internalID: -349539485
+      spriteID: 4d2d5ed74374cb841a9c615fccbf411b
+      internalID: 835004177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider lady, sprint_2
+      name: spider lady, idle_2
       rect:
         serializedVersion: 2
         x: 0
@@ -147,20 +147,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb87dfb924fc23849a49ce1d6db59476
-      internalID: 1380763730
+      spriteID: 276a3b0ec6fe91a4b9662b6ae212dcee
+      internalID: 889803487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider lady, sprint_3
+      name: spider lady, idle_3
       rect:
         serializedVersion: 2
         x: 64
@@ -168,14 +168,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 696744e0afb868c40ac3f06048062a5b
-      internalID: 182955936
+      spriteID: f79495b9210297440a1f38b86d53fbbe
+      internalID: -293899585
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spider lady, sprint_0: 38826875
-      spider lady, sprint_1: -349539485
-      spider lady, sprint_2: 1380763730
-      spider lady, sprint_3: 182955936
+      spider lady, idle_0: -822919614
+      spider lady, idle_1: 835004177
+      spider lady, idle_2: 889803487
+      spider lady, idle_3: -293899585
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
