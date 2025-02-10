@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Killscript : MonoBehaviour
 {
     Animator ani;
-    [SerializeField] float deathAnimationDuration = 2.75f; 
+    [SerializeField] float deathAnimationDuration = 2f; 
 
     void Start()
     {
@@ -22,14 +22,20 @@ public class Killscript : MonoBehaviour
         if (collision.gameObject.CompareTag("InstaDeath"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            StartCoroutine(Die());
         }
     }
+    
+
     IEnumerator Die()
     {
-        ani.SetBool("isDead", true); 
-        yield return new WaitForSeconds(deathAnimationDuration); 
+        ani.SetBool("isDead", true);
+        yield return new WaitForSeconds(deathAnimationDuration);
         Destroy(gameObject); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -7,7 +7,7 @@ public class TeleportPlayer : MonoBehaviour
     public float offset = 10f;
     public float delay = 5f;
     public float tolerance = 1.5f;
-    public ParticleSystem teleportParticals; // Keep original variable name
+    public ParticleSystem teleportParticals; 
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class TeleportPlayer : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player == null)
             {
-                Debug.LogWarning("Player not found!");
+                Debug.LogWarning(" Where are You?! ");
                 continue;
             }
 
@@ -36,14 +36,14 @@ public class TeleportPlayer : MonoBehaviour
 
                 // Move the player
                 player.transform.position = newPosition;
-                Debug.Log("Player teleported to: " + newPosition);
+                Debug.Log(" I Found You! ");
 
                 // Spawn particles at the new position
                 SpawnParticles(newPosition);
             }
             else
             {
-                Debug.Log("Player and enemy are not aligned on the X axis; teleportation skipped.");
+                Debug.Log(" I Will Get You Next Time!!! ");
             }
         }
     }

@@ -26,7 +26,7 @@ public class TheHunter : MonoBehaviour
     private bool isChasing = true;
 
     private Vector3 lastPosition;
-    private float stillTime = 0f; // Track how long the hunter has been still
+    private float stillTime = 0f; 
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class TheHunter : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No GameObject found with the 'Player' tag!");
+            Debug.LogWarning(" WHAT do you MEAN There are NO PREY?!!!  ");
         }
 
         lastPosition = transform.position;

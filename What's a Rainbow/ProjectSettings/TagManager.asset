@@ -10,6 +10,7 @@ TagManager:
   - HunterTracker
   - Ground
   - TheHunterKill
+  - InstaDeath
   layers:
   - Default
   - TransparentFX
