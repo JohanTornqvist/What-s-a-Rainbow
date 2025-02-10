@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings:")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float jumpPower = 10f;
+    [SerializeField] int jumpAmount = 1;
+    public int jumpsLeft;
 
     [Header("Ground Check:")]
     [SerializeField] ContactFilter2D groundFilter;
@@ -24,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public bool canJump = false;
     public bool hasDash = false;
+    public bool hasDubbleJump = false;
 
     [Header("State saves:")]
     public float normMoveSpeedSave;
@@ -43,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             emotionControler = emotionObject.GetComponent<Emotion>();
         }
+        jumpsLeft = jumpAmount;
     }
 
     void OnMove(InputValue value)
@@ -55,11 +60,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (canJump == true)
+        if (canJump == true || canJump == false && jumpsLeft >= jumpAmount)
         {
             rb.velocity += new Vector2(0, jumpPower);
-            //transform.position = new Vector3(transform.position.x, transform.position.y + 2, 0);
-            //rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            if(canJump == false && jumpsLeft >= jumpAmount)
+            {
+                jumpsLeft -= 1;
+            }
         }
     }
 
