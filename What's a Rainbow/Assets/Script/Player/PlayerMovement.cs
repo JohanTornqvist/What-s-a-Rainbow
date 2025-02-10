@@ -26,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
     public bool hasDash = false;
 
     [Header("State saves:")]
-    private float normMoveSpeedSave;
-    private float huntMoveSpeedSave = 0;
-    private float sadMoveSpeedSave = 0;
+    public float normMoveSpeedSave;
+    public float huntMoveSpeedSave = 0;
+    public float sadMoveSpeedSave = 0;
 
     private Animator ani;
 

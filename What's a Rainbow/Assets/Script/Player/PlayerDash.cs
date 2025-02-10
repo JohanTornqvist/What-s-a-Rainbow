@@ -7,9 +7,8 @@ public class PlayerDash : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameObject player;
-    public Vector2 dashInput;
     public Vector2 moveInput;
-    public float dashSpeed = 20f;
+    public float dashDistance = 5f; // How far the dash moves
 
     public PlayerMovement playerMovement; // Reference to PlayerMovement
 
@@ -29,6 +28,10 @@ public class PlayerDash : MonoBehaviour
 
     void OnDash(InputValue value)
     {
-        rb.velocity = new Vector2(moveInput.x * dashSpeed, rb.velocity.y);
+        if (moveInput != Vector2.zero) // Ensure the player is moving before dashing
+        {
+            Vector2 dashTarget = rb.position + (moveInput.normalized * dashDistance); // Calculate new position
+            rb.MovePosition(dashTarget); // Instantly move the player
+        }
     }
 }
