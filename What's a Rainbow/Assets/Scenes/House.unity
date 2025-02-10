@@ -366,7 +366,7 @@ MonoBehaviour:
   fadeImage: {fileID: 2146055814}
   myText: {fileID: 0}
   headerText: {fileID: 0}
-  fadeDuration: 0.01
+  fadeDuration: 1
   stayDuration: 3
 --- !u!1 &519420028
 GameObject:

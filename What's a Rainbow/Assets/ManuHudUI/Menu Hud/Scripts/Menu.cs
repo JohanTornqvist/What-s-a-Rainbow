@@ -70,6 +70,8 @@ public class ButtonEvent
 {
     [SerializeField] string _buttonName = "";
     [SerializeField] UnityEvent _unityEvent;
+    [SerializeField] UnityEvent _hoverEnterEvent; // Hover enter event
+    [SerializeField] UnityEvent _hoverExitEvent;  // Hover exit event
     [SerializeField] Texture2D _hoverCursor; // Cursor on hover
     Button _button;
 
@@ -82,17 +84,17 @@ public class ButtonEvent
 
         _button.clicked += _unityEvent.Invoke;
 
-        // 🔹 Set cursor on hover
+        // 🔹 Handle hover enter
         _button.RegisterCallback<PointerEnterEvent>(evt =>
         {
-            // Set the custom hover cursor when entering the button
+            _hoverEnterEvent.Invoke(); // Call the assigned hover enter event
             UnityEngine.Cursor.SetCursor(_hoverCursor, Vector2.zero, CursorMode.Auto);
         });
 
-        // 🔹 Reset cursor on exit
+        // 🔹 Handle hover exit
         _button.RegisterCallback<PointerLeaveEvent>(evt =>
         {
-            // Reset to default cursor when the mouse leaves the button
+            _hoverExitEvent.Invoke(); // Call the assigned hover exit event
             UnityEngine.Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         });
     }
