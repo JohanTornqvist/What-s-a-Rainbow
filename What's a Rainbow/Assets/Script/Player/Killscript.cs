@@ -7,6 +7,7 @@ public class Killscript : MonoBehaviour
     Animator ani;
     [SerializeField] float deathAnimationDuration = 2f;
     public Collider2D playerCollider;
+    public Collider2D playerJumpBox;
     public GameObject player;
     private PlayerMovement playerMovement; // Reference to PlayerMovement script
 
@@ -40,12 +41,13 @@ public class Killscript : MonoBehaviour
     {
         ani.SetBool("isDead", true);
         yield return new WaitForSeconds(0.2f); 
+        playerCollider.enabled = false;
+        playerJumpBox.enabled = false;
         if (playerMovement != null)
         {
             playerMovement.canMove = false;
             playerMovement.canJump = false;
         }
-        playerCollider.enabled = false;
         yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
