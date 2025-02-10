@@ -53,37 +53,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //void OnJump(InputValue value)
-   // {
-     //   if (canJump == true)
-       // {
-       //     rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        //    ani.SetBool("isJumping", true);
-        //}
-        //}
-
     void OnJump(InputValue value)
     {
         if (canJump == true)
         {
             rb.velocity += new Vector2(0, jumpPower);
-        }
-    }
-
-    void OnDash(InputValue value)
-    {
-        if (!hasDash) return; // Ensure dash is unlocked
-
-        if (Mathf.Abs(moveInput.x) > 0.1f) // Avoid floating-point errors
-        {
-            rb.velocity = new Vector2(moveInput.x * 40, rb.velocity.y);
+            //transform.position = new Vector3(transform.position.x, transform.position.y + 2, 0);
+            //rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }
 
     private void FixedUpdate()
     {
         // Constantly check if player is on the ground
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         canJump = playerJumpBox.IsTouching(groundFilter);
+        //Debug.Log(canJump);
         MovePlayer();
     }
 

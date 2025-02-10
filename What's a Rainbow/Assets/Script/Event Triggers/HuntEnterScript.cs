@@ -11,6 +11,8 @@ public class HuntEnterScript : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip audio_hunt;
     public PlayerMovement playerMove;
+    public GameObject hunterSpawnPoint;
+    public GameObject hunter;
 
     private void Start()
     {
@@ -44,6 +46,7 @@ public class HuntEnterScript : MonoBehaviour
         playerMove.canMove = true;  // Re-enable movement
         if (audioSource != null)
             audioSource.PlayOneShot(audio_hunt);
+        
     }
 
     public void Update()
