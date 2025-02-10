@@ -112,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
                 Sad();
                 break;
         }
+
+        if (canJump == true) jumpsLeft = jumpAmount;
     }
 
     void Normal() => moveSpeed = normMoveSpeedSave;
