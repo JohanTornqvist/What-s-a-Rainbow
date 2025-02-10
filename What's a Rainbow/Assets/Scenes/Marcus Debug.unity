@@ -1515,6 +1515,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0da88fd9a68134f838c60d09a71ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &767855611 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7514933211671351544, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+  m_PrefabInstance: {fileID: 1485838781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &767855619 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4413651958475689337, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+  m_PrefabInstance: {fileID: 1485838781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &767855620 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3966367285131494107, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+  m_PrefabInstance: {fileID: 1485838781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &767855622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,6 +1773,18 @@ PrefabInstance:
       propertyPath: normMoveSpeedSave
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3430262830771285835, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 767855620}
+    - target: {fileID: 3430262830771285835, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+      propertyPath: playerJumpBox
+      value: 
+      objectReference: {fileID: 767855611}
+    - target: {fileID: 3430262830771285835, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 767855619}
     - target: {fileID: 3430262830771285835, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
       propertyPath: deathAnimationDuration
       value: 1.5

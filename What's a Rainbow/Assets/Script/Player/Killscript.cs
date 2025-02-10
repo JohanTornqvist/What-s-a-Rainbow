@@ -9,6 +9,7 @@ public class Killscript : MonoBehaviour
     public Collider2D playerCollider;
     public Collider2D playerJumpBox;
     public GameObject player;
+    public Rigidbody2D rb;
     private PlayerMovement playerMovement; // Reference to PlayerMovement script
 
     void Start()
@@ -43,6 +44,7 @@ public class Killscript : MonoBehaviour
         yield return new WaitForSeconds(0.2f); 
         playerCollider.enabled = false;
         playerJumpBox.enabled = false;
+        rb.gravityScale = 0;
         if (playerMovement != null)
         {
             playerMovement.canMove = false;
