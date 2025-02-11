@@ -6,18 +6,23 @@ public class Killscript : MonoBehaviour
 {
     Animator ani;
     [SerializeField] float deathAnimationDuration = 2f;
-    public Collider2D playerCollider;
-    public Collider2D playerJumpBox;
-    public GameObject player;
-    public Rigidbody2D rb;
-    private PlayerMovement playerMovement; // Reference to PlayerMovement script
+    private Collider2D playerCollider;
+    private Collider2D playerJumpBox;
+    private GameObject player;
+    private Rigidbody2D rb;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
-        ani = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player");
-        playerCollider = player.GetComponent<Collider2D>();
-        playerMovement = player.GetComponent<PlayerMovement>(); // Get PlayerMovement script
+        if (player != null)
+        {
+            ani = player.GetComponent<Animator>();
+            playerCollider = player.GetComponent<Collider2D>();
+            playerJumpBox = player.GetComponentInChildren<Collider2D>(); // Ensures jump box is found
+            rb = player.GetComponent<Rigidbody2D>();
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
     }
 
     public void StartDeathSequence()
@@ -29,29 +34,37 @@ public class Killscript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("InstaDeath"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         if (collision.gameObject.CompareTag("Death"))
         {
             StartCoroutine(Die());
+            Debug.Log("Player has died.");
         }
     }
 
-    public IEnumerator Die()
+    private IEnumerator Die()
     {
-        ani.SetBool("isDead", true);
-        yield return new WaitForSeconds(0.2f); 
-        playerCollider.enabled = false;
-        playerJumpBox.enabled = false;
-        rb.gravityScale = 0;
-        rb.velocity = new Vector2(0, 0);
+        if (ani != null) ani.SetBool("isDead", true);
+        yield return new WaitForSeconds(0.2f);
+
+        if (playerCollider != null) playerCollider.enabled = false;
+        if (playerJumpBox != null) playerJumpBox.enabled = false;
+
+        if (rb != null)
+        {
+            rb.gravityScale = 0;
+            rb.velocity = Vector2.zero;
+        }
+
         if (playerMovement != null)
         {
             playerMovement.canMove = false;
             playerMovement.canJump = false;
         }
+
         yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3904651099320909819}
   - component: {fileID: 912612601392286202}
   - component: {fileID: 4613600515255562313}
-  - component: {fileID: 3430262830771285835}
   - component: {fileID: 7582597536448015061}
   - component: {fileID: 451792102159267794}
   - component: {fileID: 6009851501392822093}
@@ -25,6 +24,7 @@ GameObject:
   - component: {fileID: 6513830429058569782}
   - component: {fileID: 7506232502573158905}
   - component: {fileID: 3332970957797642368}
+  - component: {fileID: 4314671395072494602}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -355,23 +355,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3430262830771285835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4691193331072622238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathAnimationDuration: 2.97
-  playerCollider: {fileID: 0}
-  playerJumpBox: {fileID: 0}
-  player: {fileID: 0}
-  rb: {fileID: 0}
 --- !u!114 &7582597536448015061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,3 +543,20 @@ MonoBehaviour:
   sideJumpPower: 10
   gravitySave: 0
   wallGravity: 0
+--- !u!114 &4314671395072494602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathAnimationDuration: 2
+  playerCollider: {fileID: 0}
+  playerJumpBox: {fileID: 0}
+  player: {fileID: 0}
+  rb: {fileID: 0}
