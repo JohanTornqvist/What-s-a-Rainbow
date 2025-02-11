@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 8052019003438905629}
   - component: {fileID: 6513830429058569782}
   - component: {fileID: 7506232502573158905}
+  - component: {fileID: 3332970957797642368}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -112,7 +113,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1000
   m_LinearDrag: 1
-  m_AngularDrag: 40.97
+  m_AngularDrag: 1
   m_GravityScale: 2.4
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -253,9 +254,10 @@ MonoBehaviour:
   canMove: 1
   canJump: 1
   hasDash: 0
-  hasDubbleJump: 0
+  hasDoubleJump: 0
+  hasWallJumo: 0
   normMoveSpeedSave: 0
-  huntMoveSpeedSave: 18
+  huntMoveSpeedSave: 10
   sadMoveSpeedSave: 8
 --- !u!82 &4613600515255562313
 AudioSource:
@@ -278,7 +280,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 14.8510895
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -367,7 +369,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathAnimationDuration: 2.97
   playerCollider: {fileID: 0}
+  playerJumpBox: {fileID: 0}
   player: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &7582597536448015061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +498,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   dashThroughExtraDistance: 1.5
+  playerMove: {fileID: 912612601392286202}
 --- !u!114 &8052019003438905629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,3 +536,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0da88fd9a68134f838c60d09a71ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3332970957797642368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691193331072622238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fedcebee07fbffe4e9cdf2c38062f1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 3966367285131494107}
+  playerMove: {fileID: 912612601392286202}
+  direction: {x: 0, y: 0}
+  length: 0.45
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 520
+  onWall: 0
+  wallJumpPower: 10
+  sideJumpPower: 10
+  gravitySave: 0
+  wallGravity: 0
