@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -27,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public bool canJump = false;
     public bool hasDash = false;
-    public bool hasDubbleJump = false;
+    public bool hasDoubleJump = false;
+    public bool hasWallJumo = false;
 
     [Header("State saves:")]
     public float normMoveSpeedSave;
@@ -52,54 +52,51 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        if (canMove)
-        {
-            moveInput = value.Get<Vector2>();
-        }
+        moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value)
     {
-        if (canJump == true || canJump == false && jumpsLeft >= jumpAmount)
+        if (canJump)
         {
-            rb.velocity += new Vector2(0, jumpPower);
-            if(canJump == false && jumpsLeft >= jumpAmount)
-            {
-                jumpsLeft -= 1;
-            }
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower); // Apply jump force
+            jumpsLeft = hasDoubleJump ? 1 : 0; // Allow double jump if enabled
+            ani.SetTrigger("isJumping"); // Trigger jump animation
+        }
+        else if (canJump == false && jumpsLeft > 0 && hasDoubleJump == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower); // Apply jump force for double jump
+            jumpsLeft = 0; // No more jumps left after double jump
         }
     }
 
     private void FixedUpdate()
     {
-        // Constantly check if player is on the ground
-        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+        // Update the player movement and check if on the ground
+        if (canMove)
+        {
+            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            if (moveInput.x != 0)
+            {
+                ani.SetBool("isWalking", true);
+                transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1); // Flip player sprite
+            }
+            else
+            {
+                ani.SetBool("isWalking", false);
+            }
+        }
+
+        // Ground check logic to allow jumps
         canJump = playerJumpBox.IsTouching(groundFilter);
-        //Debug.Log(canJump);
-        MovePlayer();
-    }
-
-    void MovePlayer()
-    {
-        if (!canMove) return;
-
-        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-
-        if (moveInput.x != 0)
-        {
-            ani.SetBool("isWalking", true);
-            transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1); // Flip player sprite
-        }
-        else
-        {
-            ani.SetBool("isWalking", false);
-        }
+        if (canJump) jumpsLeft = jumpAmount; // Reset jumps if grounded
     }
 
     void Update()
     {
-        ani.SetBool("isJumping", !canJump); // Automatically update jump animation
+        ani.SetBool("isJumping", !canJump); // Update jump animation status
 
+        // Handle state-based movement speeds
         switch (playerState)
         {
             case 0:
@@ -112,8 +109,6 @@ public class PlayerMovement : MonoBehaviour
                 Sad();
                 break;
         }
-
-        if (canJump == true) jumpsLeft = jumpAmount;
     }
 
     void Normal() => moveSpeed = normMoveSpeedSave;
