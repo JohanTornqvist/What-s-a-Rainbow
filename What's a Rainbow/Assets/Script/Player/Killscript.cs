@@ -45,6 +45,7 @@ public class Killscript : MonoBehaviour
         playerCollider.enabled = false;
         playerJumpBox.enabled = false;
         rb.gravityScale = 0;
+        rb.velocity = new Vector2(0, 0);
         if (playerMovement != null)
         {
             playerMovement.canMove = false;
