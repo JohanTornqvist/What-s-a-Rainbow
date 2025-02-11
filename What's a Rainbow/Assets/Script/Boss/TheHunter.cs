@@ -28,11 +28,12 @@ public class TheHunter : MonoBehaviour
 
     private Vector3 lastPosition;
     private float stillTime = 0f;
+    private bool wasGrounded; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        ani = GetComponent<Animator>(); // Ensure the Animator is initialized
+        ani = GetComponent<Animator>(); 
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -55,6 +56,20 @@ public class TheHunter : MonoBehaviour
 
         // Update the "isHunting" parameter based on the isChasing bool.
         ani.SetBool("isHunting", isChasing);
+
+        // Detect when the hunter leaves the ground to start the jump animation.
+        if (wasGrounded && !isGrounded)
+        {
+            ani.SetBool("isJumpingHunter", true);
+        }
+
+        // Stop the jump animation when the hunter lands.
+        if (!wasGrounded && isGrounded)
+        {
+            ani.SetBool("isJumpingHunter", false);
+        }
+
+        wasGrounded = isGrounded; 
     }
 
     IEnumerator ChasePlayer()
@@ -71,7 +86,7 @@ public class TheHunter : MonoBehaviour
 
     void DecideAction()
     {
-        if (!isGrounded) return; // Avoid making decisions mid-air
+        if (!isGrounded) return;
 
         // Always prioritize ledge jumps first
         if (IsApproachingLedge())
@@ -115,7 +130,6 @@ public class TheHunter : MonoBehaviour
             return;
         }
 
-        // Default: Chase the player
         MoveTowardsPlayer();
     }
 
@@ -191,7 +205,7 @@ public class TheHunter : MonoBehaviour
         }
         else
         {
-            stillTime = 0f; // Reset if moving
+            stillTime = 0f;
         }
 
         lastPosition = transform.position;

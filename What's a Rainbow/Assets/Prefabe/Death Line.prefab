@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6475531415402877318}
   m_Layer: 0
   m_Name: Death Line
-  m_TagString: Death
+  m_TagString: InstaDeath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,14 +78,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -8.245186, y: -5.453166, z: 0}
-  - {x: -4.6495094, y: -5.0679665, z: 1}
-  - {x: -5.5992794, y: -6.551385, z: -15.886671}
-  - {x: 8.908974, y: -6.551385, z: -15.886671}
-  - {x: 19.971382, y: -6.6284447, z: -15.886671}
+  - {x: 0, y: -41.11, z: 0}
+  - {x: 30.87, y: -41.4, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -103,8 +100,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.28627452}
-      key1: {r: 1, g: 0, b: 0, a: 0.28627452}
+      key0: {r: 1, g: 0.5276791, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -139,7 +136,7 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
 --- !u!68 &4075837532481706271
@@ -207,3 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathAnimationDuration: 2
+  playerCollider: {fileID: 0}
+  playerJumpBox: {fileID: 0}
+  player: {fileID: 0}
+  rb: {fileID: 0}
