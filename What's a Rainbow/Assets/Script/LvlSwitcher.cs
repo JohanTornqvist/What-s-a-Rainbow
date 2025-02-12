@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
@@ -6,20 +8,19 @@ using UnityEditor;
 
 public class LvlSwitcher : MonoBehaviour
 {
-    [SerializeField] private string sceneName; // Stores the scene name
+    [SerializeField] private SceneReference sceneToLoad; // Scene asset reference
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Ensure only the Player triggers it
+        if (other.CompareTag("Player")) // Make sure the Player has the correct tag
         {
-            if (!string.IsNullOrEmpty(sceneName))
+            if (!string.IsNullOrEmpty(sceneToLoad.ScenePath)) // Ensure a valid scene
             {
-                Debug.Log("Switching to scene: " + sceneName);
-                SceneManager.LoadScene(sceneName);
+                SceneManager.LoadScene(sceneToLoad.SceneName);
             }
             else
             {
-                Debug.LogWarning("No scene assigned in LvlSwitcher! Please assign a scene.");
+                Debug.LogWarning("No scene assigned in LvlSwitcher! Please assign a scene in the Inspector.");
             }
         }
     }
