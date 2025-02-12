@@ -70,7 +70,7 @@ public class WallJump : MonoBehaviour
     
     void OnJump()
     {
-        if(playerMove.hasWallJumo == true)
+        if(playerMove.hasWallJump == true)
         {
         if(onWall == true && playerMove.moveInput == new Vector2(1, 0))
         {
