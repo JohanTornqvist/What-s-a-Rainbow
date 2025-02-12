@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Marcus Debug.unity
     guid: ac77ab277673f23429ddffe6986a2c2f
+  - enabled: 1
+    path: Assets/Scenes/lvl 4.unity
+    guid: d88fd53ce6193ab4c8acdb5df8bd5750
   m_configObjects: {}
