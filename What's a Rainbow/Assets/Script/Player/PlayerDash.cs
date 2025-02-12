@@ -9,12 +9,18 @@ public class PlayerDash : MonoBehaviour
     public float dashDistance = 5f; // Maximum dash distance
     public LayerMask ignoreLayers; // Layers to ignore during dash collisions (multiple layers)
     public LayerMask dashThroughLayer; // Layer to dash through if hit
+    public bool canDash = true;
+    public float dashCoolDown = 3f;
+    public float dashTimer;
 
     public float dashThroughExtraDistance = 1f; // Extra distance to dash through an object if it's on Dash Through layer
 
     public PlayerMovement playerMove;
 
-
+    public void Start()
+    {
+        dashTimer = dashCoolDown;
+    }
     private void Update()
     {
 
@@ -26,11 +32,20 @@ public class PlayerDash : MonoBehaviour
         {
             moveInput = Vector2.right;
         }
+
+        if(canDash == false)
+        {
+            dashTimer -= 1f * Time.deltaTime;
+            if (dashTimer <= 0)
+            {
+                canDash = true;
+            } 
+        }
     }
 
     void OnDash(InputValue value)
     {
-        if (playerMove.hasDash == true)
+        if (playerMove.hasDash == true && canDash == true)
         {
             if (moveInput != Vector2.zero) // Ensure the player is moving before dashing
             {
@@ -65,6 +80,8 @@ public class PlayerDash : MonoBehaviour
 
                 // Instantly move player
                 rb.position = dashTarget;
+                dashTimer = dashCoolDown;
+                canDash = false;
             }
         }
     }
@@ -77,4 +94,6 @@ public class PlayerDash : MonoBehaviour
             Gizmos.DrawLine(rb.position, rb.position + (moveInput.normalized * dashDistance));
         }
     }
+
+    
 }
