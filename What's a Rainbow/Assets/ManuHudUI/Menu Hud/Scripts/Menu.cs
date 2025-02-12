@@ -20,7 +20,7 @@ public class VolumeSlider
     [SerializeField] AudioMixer _audioMixer;
     [SerializeField] string _volumeName = "";
     [SerializeField] ClickChange _clickEvent;
-    Slider _slider;
+    private Slider _slider;
 
     public void Activate(UIDocument document)
     {
@@ -47,7 +47,7 @@ public class ToggleEvent
 {
     [SerializeField] string _toggleName = "";
     [SerializeField] BoolChange _boolEvent;
-    Toggle _toggle;
+    private Toggle _toggle;
 
     public void Activate(UIDocument document)
     {
@@ -70,10 +70,10 @@ public class ButtonEvent
 {
     [SerializeField] string _buttonName = "";
     [SerializeField] UnityEvent _unityEvent;
-    [SerializeField] UnityEvent _hoverEnterEvent; // Hover enter event
-    [SerializeField] UnityEvent _hoverExitEvent;  // Hover exit event
-    [SerializeField] Texture2D _hoverCursor; // Cursor on hover
-    Button _button;
+    [SerializeField] UnityEvent _hoverEnterEvent;
+    [SerializeField] UnityEvent _hoverExitEvent;
+    [SerializeField] Texture2D _hoverCursor;
+    private Button _button;
 
     public void Activate(UIDocument document)
     {
@@ -83,18 +83,15 @@ public class ButtonEvent
         }
 
         _button.clicked += _unityEvent.Invoke;
-
-        // 🔹 Handle hover enter
         _button.RegisterCallback<PointerEnterEvent>(evt =>
         {
-            _hoverEnterEvent.Invoke(); // Call the assigned hover enter event
+            _hoverEnterEvent.Invoke();
             UnityEngine.Cursor.SetCursor(_hoverCursor, Vector2.zero, CursorMode.Auto);
         });
 
-        // 🔹 Handle hover exit
         _button.RegisterCallback<PointerLeaveEvent>(evt =>
         {
-            _hoverExitEvent.Invoke(); // Call the assigned hover exit event
+            _hoverExitEvent.Invoke();
             UnityEngine.Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         });
     }
@@ -111,13 +108,11 @@ public class Menu : MonoBehaviour
     [SerializeField] List<ButtonEvent> _buttonEvents;
     [SerializeField] List<VolumeSlider> _volumeSliders;
     [SerializeField] List<ToggleEvent> _toggleEvents;
-    [SerializeField] Texture2D _defaultCursor; // Default cursor
-
-    VisualElement _curMenu = null;
+    [SerializeField] Texture2D _defaultCursor;
+    private VisualElement _curMenu = null;
 
     private void Start()
     {
-        // 🔹 Set default cursor when the menu starts
         UnityEngine.Cursor.SetCursor(_defaultCursor, Vector2.zero, CursorMode.Auto);
     }
 
@@ -133,7 +128,6 @@ public class Menu : MonoBehaviour
 
     public void LoadScene(int buildIndex)
     {
-        // 🔹 Reset cursor before switching scenes
         UnityEngine.Cursor.SetCursor(_defaultCursor, Vector2.zero, CursorMode.Auto);
         SceneManager.LoadScene(buildIndex);
     }
@@ -150,14 +144,37 @@ public class Menu : MonoBehaviour
     private void OnEnable()
     {
         _buttonEvents.ForEach(button => button.Activate(_document));
-        _volumeSliders.ForEach(button => button.Activate(_document));
-        _toggleEvents.ForEach(button => button.Activate(_document));
+        _volumeSliders.ForEach(slider => slider.Activate(_document));
+        _toggleEvents.ForEach(toggle => toggle.Activate(_document));
     }
 
     private void OnDisable()
     {
         _buttonEvents.ForEach(button => button.Inactivate(_document));
-        _volumeSliders.ForEach(button => button.Inactivate(_document));
-        _toggleEvents.ForEach(button => button.Inactivate(_document));
+        _volumeSliders.ForEach(slider => slider.Inactivate(_document));
+        _toggleEvents.ForEach(toggle => toggle.Inactivate(_document));
+    }
+}
+
+public class ApplyCustomFont : MonoBehaviour
+{
+    [SerializeField] private UIDocument _document;
+    private Label _textLabel;
+
+    private void Start()
+    {
+        var root = _document.rootVisualElement;
+        _textLabel = root.Q<Label>("Pause");
+
+        Font customFont = Resources.Load<Font>("Fonts/MyCustomFont");
+        if (customFont != null)
+        {
+            _textLabel.style.unityFont = customFont;
+            _textLabel.style.fontSize = 24;
+        }
+        else
+        {
+            Debug.LogError("Font not found in Resources!");
+        }
     }
 }

@@ -23,6 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Debug Scenes/Marcus Debug.unity
     guid: ac77ab277673f23429ddffe6986a2c2f
+<<<<<<< HEAD
   - enabled: 0
     path: Assets/Scenes/Debug Scenes/Debug lars.unity
     guid: 8ab1bcabc369c86429efad85173f4334
@@ -32,4 +33,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Debug Scenes/Test LvL.unity
     guid: e3b44f72c3f33974ea522724c7273c00
+=======
+  - enabled: 1
+    path: Assets/Scenes/lvl 4.unity
+    guid: d88fd53ce6193ab4c8acdb5df8bd5750
+>>>>>>> 018fe865694b66990111a7057f2a81d03f2331bc
   m_configObjects: {}
