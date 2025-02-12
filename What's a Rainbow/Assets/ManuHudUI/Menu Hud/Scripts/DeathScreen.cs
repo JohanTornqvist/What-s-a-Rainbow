@@ -8,6 +8,7 @@ public class DeathScreen : MonoBehaviour
     private VisualElement deathScreenRoot;
     private Button quitButton;
     private Button restartButton;
+    private bool isPaused = false;
 
     void Start()
     {
@@ -55,6 +56,8 @@ public class DeathScreen : MonoBehaviour
     // Public method to open the death screen
     public void OpenDeathScreen()
     {
+        Time.timeScale = 0;
+        isPaused = true;
         if (deathScreenRoot != null)
         {
             deathScreenRoot.style.display = DisplayStyle.Flex;  // Show the death screen
@@ -77,6 +80,7 @@ public class DeathScreen : MonoBehaviour
     private void OnRestartButtonPressed()
     {
         Time.timeScale = 1;
+        isPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

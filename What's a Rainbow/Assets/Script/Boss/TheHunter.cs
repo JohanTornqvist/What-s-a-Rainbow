@@ -116,7 +116,7 @@ public class TheHunter : MonoBehaviour
         {
             if (CanJump())
             {
-                JumpUp();
+                Jump();
             }
 
             if (Mathf.Abs(diff.x) < 0.5f) // Only stop if X positions are nearly the same
@@ -148,14 +148,7 @@ public class TheHunter : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         lastJumpTime = Time.time;
-        stillTime = 0f; // Reset still time when jumping
-    }
-
-    void JumpUp()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        lastJumpTime = Time.time;
-        stillTime = 0f;
+        stillTime = 0f; 
     }
 
     void JumpForward()
@@ -163,21 +156,6 @@ public class TheHunter : MonoBehaviour
         rb.velocity = new Vector2(Mathf.Sign(playerTransform.position.x - transform.position.x) * forwardJumpForce, jumpForce * 0.8f);
         lastJumpTime = Time.time;
         stillTime = 0f;
-    }
-
-    void MoveToEdgeAndJumpOff()
-    {
-        Vector2 checkPos = (Vector2)transform.position + new Vector2(Mathf.Sign(rb.velocity.x) * 1f, 0);
-        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, groundCheckRadius, groundLayer);
-
-        if (hit.collider == null)
-        {
-            Jump();
-        }
-        else
-        {
-            MoveTowardsPlayer();
-        }
     }
 
     bool IsApproachingLedge()
