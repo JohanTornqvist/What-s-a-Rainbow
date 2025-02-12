@@ -6,10 +6,12 @@ public class SadEnter : MonoBehaviour
 {
     [SerializeField] private Collider2D trigger;
     public Emotion emotionControler;
+    [SerializeField] SpriteRenderer sprite;
 
 
     void Start()
     {
+        sprite.enabled = false;
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
     }

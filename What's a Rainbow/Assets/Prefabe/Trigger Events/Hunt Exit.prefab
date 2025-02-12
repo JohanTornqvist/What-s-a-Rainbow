@@ -151,3 +151,5 @@ MonoBehaviour:
   globalVolume: {fileID: 0}
   emotionControler: {fileID: 0}
   playerMove: {fileID: 0}
+  huntAudio: {fileID: 0}
+  sprite: {fileID: 3106994734224364342}

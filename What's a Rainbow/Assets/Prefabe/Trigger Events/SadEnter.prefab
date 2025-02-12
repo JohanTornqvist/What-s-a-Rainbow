@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 941693225062397967}
   emotionControler: {fileID: 0}
+  sprite: {fileID: 6196032835395129020}
 --- !u!61 &941693225062397967
 BoxCollider2D:
   m_ObjectHideFlags: 0

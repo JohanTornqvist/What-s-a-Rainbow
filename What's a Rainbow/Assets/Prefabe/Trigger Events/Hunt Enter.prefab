@@ -154,6 +154,9 @@ MonoBehaviour:
   audioSource: {fileID: 8994243508980963598}
   audio_hunt: {fileID: 8300000, guid: d235bd078fc546f4181c97710ec25161, type: 3}
   playerMove: {fileID: 0}
+  hunterSpawnPoint: {fileID: 0}
+  hunter: {fileID: 0}
+  sprite: {fileID: 5597893335563904766}
 --- !u!82 &8994243508980963598
 AudioSource:
   m_ObjectHideFlags: 0

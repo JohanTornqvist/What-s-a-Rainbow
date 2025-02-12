@@ -13,9 +13,11 @@ public class HuntEnterScript : MonoBehaviour
     public PlayerMovement playerMove;
     public GameObject hunterSpawnPoint;
     public GameObject hunter;
+    [SerializeField] SpriteRenderer sprite;
 
     private void Start()
     {
+        sprite.enabled = false;
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<PlayerMovement>();
 

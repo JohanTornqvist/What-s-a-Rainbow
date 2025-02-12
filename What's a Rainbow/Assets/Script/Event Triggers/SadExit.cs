@@ -10,9 +10,11 @@ public class SadExit : MonoBehaviour
     public Emotion emotionControler;
     public PlayerMovement playerMove;
     public Hunt_Audio_Controler huntAudio;
+    [SerializeField] SpriteRenderer sprite;
 
     private void Start()
     {
+        sprite.enabled = false;
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<PlayerMovement>();
         huntAudio = player.GetComponent<Hunt_Audio_Controler>();
