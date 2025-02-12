@@ -4,30 +4,33 @@ using UnityEngine.SceneManagement;
 
 public class Killscript : MonoBehaviour
 {
-    Animator ani;
-    [SerializeField] float deathAnimationDuration = 2f;
+    private Animator ani;
+    [SerializeField] private float deathAnimationDuration = 2f;
     private Collider2D playerCollider;
     private Collider2D playerJumpBox;
-    private GameObject player;
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
+    private DeathScreen deathScreen;
+
+    [SerializeField] private bool showDeathScreen = true;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             ani = player.GetComponent<Animator>();
             playerCollider = player.GetComponent<Collider2D>();
-            playerJumpBox = player.GetComponentInChildren<Collider2D>(); // Ensures jump box is found
+            playerJumpBox = player.GetComponentInChildren<Collider2D>();
             rb = player.GetComponent<Rigidbody2D>();
             playerMovement = player.GetComponent<PlayerMovement>();
         }
-    }
 
-    public void StartDeathSequence()
-    {
-        StartCoroutine(Die());
+        deathScreen = FindObjectOfType<DeathScreen>();
+        if (deathScreen == null)
+        {
+            Debug.LogError("DeathScreen component not found in the scene.");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,12 +39,16 @@ public class Killscript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        if (collision.gameObject.CompareTag("Death"))
+        else if (collision.gameObject.CompareTag("Death"))
         {
             StartCoroutine(Die());
             Debug.Log("Player has died.");
         }
+    }
+
+    public void StartDeathSequence()
+    {
+        StartCoroutine(Die());
     }
 
     private IEnumerator Die()
@@ -65,6 +72,15 @@ public class Killscript : MonoBehaviour
         }
 
         yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        
+        if (showDeathScreen && deathScreen != null)
+        {
+            deathScreen.OpenDeathScreen();  
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  
+        }
     }
 }
