@@ -10929,6 +10929,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1946909131}
     - target: {fileID: 4314671395072494602, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
+      propertyPath: showDeathScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314671395072494602, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
       propertyPath: deathAnimationDuration
       value: 1.5
       objectReference: {fileID: 0}
