@@ -5,82 +5,106 @@ using UnityEngine.InputSystem;
 
 public class WallJump : MonoBehaviour
 {
-    public Rigidbody2D rb;  // Rigidbody for the player
-    public PlayerMovement playerMove;  // Player movement script for input
-    public Vector2 direction;  // Direction the player is facing
-    public float length = 0.5f;  // Length of the Raycast
-    public LayerMask collisionMask;  // LayerMask to specify what layers the Raycast should collide with
-    public bool onWall = false;
+    public Rigidbody2D rb;
+    public PlayerMovement playerMove;
+
+    [Header("Wall Detection")]
+    public float sphereRadius = 0.2f;  // Radius of the SphereCasts
+    public float checkDistance = 0.5f; // How far to check for walls
+    public LayerMask wallLayers;       // Which layers count as a wall
+    public float detectorHeight = 0.5f; // Vertical spacing between SphereCasts
+    public float verticalOffset = -0.5f; // Moves the detection points downward
+
+    [Header("Wall Jump Settings")]
     public float wallJumpPower = 10f;
     public float sideJumpPower = 10f;
-    public float gravitySave;
+    public float gravityNormal;
     public float wallGravity;
 
-   void Start()
+    private bool isTouchingWall = false;
+    private Vector2 facingDirection = Vector2.right;
+
+    void Start()
     {
-        gravitySave = rb.gravityScale;
+        gravityNormal = rb.gravityScale;
         wallGravity = rb.gravityScale / 2;
     }
 
- 
-
     private void Update()
     {
-        // Update the direction based on player input
-        if (playerMove.moveInput == new Vector2(-1, 0))
+        // Update the facing direction based on input
+        if (playerMove.moveInput.x < 0)
         {
-            direction = Vector2.left;
+            facingDirection = Vector2.left;
         }
-        if (playerMove.moveInput == new Vector2(1, 0))
+        else if (playerMove.moveInput.x > 0)
         {
-            direction = Vector2.right;
+            facingDirection = Vector2.right;
         }
 
-        // Perform a raycast in the direction the player is facing, with the selected LayerMask
-        RaycastHit2D hit = Physics2D.Raycast(rb.position + new Vector2(0, 0.1f), direction, length, collisionMask);
+        // Adjust base position downward by verticalOffset
+        Vector2 basePosition = rb.position + new Vector2(0, verticalOffset);
 
-        // Check if the raycast hit something
-        if (hit.collider != null)
+        // Define the positions of the two SphereCasts (upper and lower)
+        Vector2 upperPosition = basePosition + new Vector2(0, detectorHeight);
+        Vector2 lowerPosition = basePosition - new Vector2(0, detectorHeight);
+
+        // Perform two SphereCasts to detect walls
+        RaycastHit2D upperHit = Physics2D.CircleCast(upperPosition, sphereRadius, facingDirection, checkDistance, wallLayers);
+        RaycastHit2D lowerHit = Physics2D.CircleCast(lowerPosition, sphereRadius, facingDirection, checkDistance, wallLayers);
+
+        // Logging system
+        if (upperHit.collider != null && lowerHit.collider != null)
         {
-            // Log the name of the object hit by the raycast
-            Debug.Log("Raycast Hit: " + hit.collider.gameObject.name);
+            Debug.Log($"Both upper and lower hits detected on: {upperHit.collider.gameObject.name}");
+        }
+        else if (upperHit.collider != null)
+        {
+            Debug.Log($"Upper hit detected on: {upperHit.collider.gameObject.name}");
+        }
+        else if (lowerHit.collider != null)
+        {
+            Debug.Log($"Lower hit detected on: {lowerHit.collider.gameObject.name}");
+        }
+
+        // If either of the two SphereCasts detects a wall, set wall jump variables
+        if (upperHit.collider != null || lowerHit.collider != null)
+        {
             playerMove.canMove = false;
             playerMove.jumpsLeft = 1;
-            onWall = true;
+            isTouchingWall = true;
             rb.gravityScale = wallGravity;
-
         }
-        else 
+        else
         {
             playerMove.canMove = true;
-            onWall = false;
-            rb.gravityScale = gravitySave;
+            isTouchingWall = false;
+            rb.gravityScale = gravityNormal;
         }
     }
 
-    // To visualize the raycast in the scene view (for debugging purposes)
-    private void OnDrawGizmos()
-    {
-        // Set color for the Gizmos (Raycast visualizer)
-        Gizmos.color = Color.red;
-
-        // Draw the ray in the direction the player is facing
-        Gizmos.DrawRay(rb.position, direction * length);
-    }
-    
     void OnJump()
     {
-        if(playerMove.hasWallJump == true)
+        if (playerMove.hasWallJump && isTouchingWall)
         {
-        if(onWall == true && playerMove.moveInput == new Vector2(1, 0))
-        {
-            rb.velocity = new Vector2(-sideJumpPower, wallJumpPower);
+            float jumpDirection = facingDirection.x > 0 ? -1 : 1; // Flip jump direction away from the wall
+            rb.velocity = new Vector2(jumpDirection * sideJumpPower, wallJumpPower);
         }
-        if (onWall == true && playerMove.moveInput == new Vector2(-1, 0))
-        {
-            rb.velocity = new Vector2(sideJumpPower, wallJumpPower);
-        }
-        }
-       
+    }
+
+    // Visualize the SphereCasts in the Scene view
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = isTouchingWall ? Color.green : Color.red;
+
+        // Adjust base position downward by verticalOffset
+        Vector2 basePosition = rb.position + new Vector2(0, verticalOffset);
+
+        // Draw spheres at the detection points
+        Vector2 upperPosition = basePosition + new Vector2(0, detectorHeight);
+        Vector2 lowerPosition = basePosition - new Vector2(0, detectorHeight);
+
+        Gizmos.DrawWireSphere(upperPosition + (Vector2)(facingDirection * checkDistance), sphereRadius);
+        Gizmos.DrawWireSphere(lowerPosition + (Vector2)(facingDirection * checkDistance), sphereRadius);
     }
 }
