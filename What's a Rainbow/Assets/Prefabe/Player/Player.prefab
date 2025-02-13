@@ -543,7 +543,7 @@ MonoBehaviour:
   checkDistance: 0.26
   wallLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   detectorHeight: 0.26
   verticalOffset: -0.42
   wallJumpPower: 10

@@ -67,7 +67,7 @@ public class PlayerDash : MonoBehaviour
                 RaycastHit2D upperHit = Physics2D.CircleCast(upperPosition, sphereRadius, dashDirection, dashDistance, collisionMask);
                 RaycastHit2D lowerHit = Physics2D.CircleCast(lowerPosition, sphereRadius, dashDirection, dashDistance, collisionMask);
 
-                Vector2 dashTarget = rb.position + (dashDirection * dashDistance);
+                Vector2 dashTarget = rb.position + (dashDirection * dashDistance - new Vector2(0, 0.1f));
 
                 // Handling collisions
                 if (upperHit.collider != null && lowerHit.collider != null)
