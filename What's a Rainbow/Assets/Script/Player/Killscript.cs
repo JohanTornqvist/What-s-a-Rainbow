@@ -55,27 +55,19 @@ public class Killscript : MonoBehaviour
 
     private IEnumerator Die()
     {
+        ani.Play("DeathAnimation");
+        ani.SetBool("isDead", true);
         if (playerMove != null) playerMove.enabled = false;
         if (playerDash != null) playerDash.enabled = false;
         if (playerInput != null) playerInput.enabled = false;
-
         if (rb != null)
         {
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;  
         }
-
         if (playerCollider != null) playerCollider.enabled = false;
         if (playerJumpBox != null) playerJumpBox.enabled = false;
-
-        if (ani != null)
-        {
-            ani.Play("DeathAnimation");
-            ani.SetBool("isDead", true);
-        }
-
         yield return new WaitForSeconds(1.5f);
-
         if (showDeathScreen && deathScreen != null)
         {
             deathScreen.OpenDeathScreen();
