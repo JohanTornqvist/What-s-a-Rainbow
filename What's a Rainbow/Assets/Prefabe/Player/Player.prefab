@@ -488,6 +488,7 @@ MonoBehaviour:
   sphereRadius: 0.24
   sphereHeightOffset: 0.26
   zeroPointOffset: -0.44
+  finalDashHeightOffset: 0.2
 --- !u!114 &8052019003438905629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,8 +563,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   playerMove: {fileID: 912612601392286202}
   playerDash: {fileID: 5749868438022397188}
   playerInput: {fileID: 3904651099320909819}
   deathAnimationDuration: 0.5
+=======
+  deathAnimationDuration: 1.5
+  playerMove: {fileID: 0}
+  playerDash: {fileID: 0}
+>>>>>>> Stashed changes
   showDeathScreen: 1
