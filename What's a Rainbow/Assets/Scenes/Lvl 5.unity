@@ -42330,10 +42330,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222265753}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: 912612601392286202, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
       propertyPath: hasDash
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 4691193331072622238, guid: a66d3c50525e7f04c804ceef01c8c369, type: 3}
       propertyPath: m_Name
       value: Player
