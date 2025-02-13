@@ -255,7 +255,7 @@ MonoBehaviour:
   canJump: 1
   hasDash: 0
   hasDoubleJump: 0
-  hasWallJumo: 0
+  hasWallJump: 0
   normMoveSpeedSave: 0
   huntMoveSpeedSave: 10
   sadMoveSpeedSave: 8
@@ -480,8 +480,14 @@ MonoBehaviour:
   dashThroughLayer:
     serializedVersion: 2
     m_Bits: 512
+  canDash: 1
+  dashCoolDown: 3
+  dashTimer: 0
   dashThroughExtraDistance: 1.5
   playerMove: {fileID: 912612601392286202}
+  sphereRadius: 0.24
+  sphereHeightOffset: 0.26
+  zeroPointOffset: -0.44
 --- !u!114 &8052019003438905629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,15 +539,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3966367285131494107}
   playerMove: {fileID: 912612601392286202}
-  direction: {x: 0, y: 0}
-  length: 0.45
-  collisionMask:
+  sphereRadius: 0.24
+  checkDistance: 0.26
+  wallLayers:
     serializedVersion: 2
-    m_Bits: 520
-  onWall: 0
+    m_Bits: 0
+  detectorHeight: 0.26
+  verticalOffset: -0.42
   wallJumpPower: 10
   sideJumpPower: 10
-  gravitySave: 0
+  gravityNormal: 0
   wallGravity: 0
 --- !u!114 &4314671395072494602
 MonoBehaviour:
@@ -556,7 +563,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathAnimationDuration: 2
-  playerCollider: {fileID: 0}
-  playerJumpBox: {fileID: 0}
-  player: {fileID: 0}
-  rb: {fileID: 0}
+  showDeathScreen: 1
