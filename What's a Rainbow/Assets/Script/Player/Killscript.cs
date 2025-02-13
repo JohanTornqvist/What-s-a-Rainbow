@@ -11,6 +11,8 @@ public class Killscript : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
     private DeathScreen deathScreen;
+    public PlayerMovement playerMove;
+    public PlayerDash playerDash;
 
     [SerializeField] private bool showDeathScreen = true;
 
@@ -42,6 +44,8 @@ public class Killscript : MonoBehaviour
         else if (collision.gameObject.CompareTag("Death"))
         {
             StartCoroutine(Die());
+            playerDash.enabled = false;
+            playerMove.enabled = false;
             Debug.Log("Player has died.");
         }
     }
@@ -55,24 +59,18 @@ public class Killscript : MonoBehaviour
     {
         if (ani != null) ani.SetBool("isDead", true);
         yield return new WaitForSeconds(0.2f);
-
         if (playerCollider != null) playerCollider.enabled = false;
         if (playerJumpBox != null) playerJumpBox.enabled = false;
 
-        if (rb != null)
-        {
             rb.gravityScale = 0;
             rb.velocity = Vector2.zero;
-        }
 
         if (playerMovement != null)
         {
             playerMovement.canMove = false;
             playerMovement.canJump = false;
         }
-
         yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
-
         
         if (showDeathScreen && deathScreen != null)
         {

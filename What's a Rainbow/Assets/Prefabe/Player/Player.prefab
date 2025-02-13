@@ -562,5 +562,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathAnimationDuration: 2
+  deathAnimationDuration: 0.35
   showDeathScreen: 1
