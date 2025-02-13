@@ -1,19 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Killscript : MonoBehaviour
 {
     private Animator ani;
-    [SerializeField] private float deathAnimationDuration = 2f;
     private Collider2D playerCollider;
     private Collider2D playerJumpBox;
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
     private DeathScreen deathScreen;
+
     public PlayerMovement playerMove;
     public PlayerDash playerDash;
+    public PlayerInput playerInput;
 
+    [SerializeField] private float deathAnimationDuration = 2f;
     [SerializeField] private bool showDeathScreen = true;
 
     void Start()
@@ -26,6 +29,7 @@ public class Killscript : MonoBehaviour
             playerJumpBox = player.GetComponentInChildren<Collider2D>();
             rb = player.GetComponent<Rigidbody2D>();
             playerMovement = player.GetComponent<PlayerMovement>();
+            playerInput = player.GetComponent<PlayerInput>();
         }
 
         deathScreen = FindObjectOfType<DeathScreen>();
@@ -37,15 +41,9 @@ public class Killscript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("InstaDeath"))
+        if (collision.gameObject.CompareTag("Death"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        else if (collision.gameObject.CompareTag("Death"))
-        {
-            StartCoroutine(Die());
-            playerDash.enabled = false;
-            playerMove.enabled = false;
+            StartDeathSequence();
             Debug.Log("Player has died.");
         }
     }
@@ -57,28 +55,35 @@ public class Killscript : MonoBehaviour
 
     private IEnumerator Die()
     {
-        if (ani != null) ani.SetBool("isDead", true);
-        yield return new WaitForSeconds(0.2f);
+        if (playerMove != null) playerMove.enabled = false;
+        if (playerDash != null) playerDash.enabled = false;
+        if (playerInput != null) playerInput.enabled = false;
+
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;  
+        }
+
         if (playerCollider != null) playerCollider.enabled = false;
         if (playerJumpBox != null) playerJumpBox.enabled = false;
 
-            rb.gravityScale = 0;
-            rb.velocity = Vector2.zero;
-
-        if (playerMovement != null)
+        if (ani != null)
         {
-            playerMovement.canMove = false;
-            playerMovement.canJump = false;
+            ani.Play("DeathAnimation");
+            ani.SetBool("isDead", true);
         }
-        yield return new WaitForSeconds(deathAnimationDuration - 0.2f);
-        
+
+        yield return new WaitForSeconds(1.5f);
+
         if (showDeathScreen && deathScreen != null)
         {
-            deathScreen.OpenDeathScreen();  
+            deathScreen.OpenDeathScreen();
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
 }
