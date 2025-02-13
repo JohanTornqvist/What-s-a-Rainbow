@@ -20,6 +20,7 @@ public class PlayerDash : MonoBehaviour
     public float sphereRadius = 0.2f;
     public float sphereHeightOffset = 0.5f; // Vertical distance between the two SphereCasts
     public float zeroPointOffset = -0.5f; // Adjust the height of the base "zero point"
+    public float finalDashHeightOffset = 0.2f; // Height adjustment after dash
 
     void Start()
     {
@@ -67,7 +68,7 @@ public class PlayerDash : MonoBehaviour
                 RaycastHit2D upperHit = Physics2D.CircleCast(upperPosition, sphereRadius, dashDirection, dashDistance, collisionMask);
                 RaycastHit2D lowerHit = Physics2D.CircleCast(lowerPosition, sphereRadius, dashDirection, dashDistance, collisionMask);
 
-                Vector2 dashTarget = rb.position + (dashDirection * dashDistance - new Vector2(0, 0.1f));
+                Vector2 dashTarget = rb.position + (dashDirection * dashDistance);
 
                 // Handling collisions
                 if (upperHit.collider != null && lowerHit.collider != null)
@@ -93,6 +94,9 @@ public class PlayerDash : MonoBehaviour
                     dashTarget += dashDirection * dashThroughExtraDistance;
                     Debug.Log("Dash through triggered!");
                 }
+
+                // Apply final height offset (Move player slightly up)
+                dashTarget += new Vector2(0, finalDashHeightOffset);
 
                 // Move player instantly
                 rb.position = dashTarget;
