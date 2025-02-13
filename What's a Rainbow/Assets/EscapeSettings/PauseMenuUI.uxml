@@ -5,7 +5,7 @@
                 <ui:Label tabindex="-1" text="Pause&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Pause" style="width: 267px; font-size: 36px; -unity-text-align: upper-center;" />
                 <ui:Toggle label="Mute" name="muteToggle" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; font-size: 36px; width: 267px; flex-direction: row;" />
                 <ui:Slider label="Volume" high-value="100" name="volumeSlider" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; height: auto; width: 267px; font-size: 36px;" />
-                <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quitButton" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; width: 200px; height: 50px;" />
+                <ui:Button text="Return" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quitButton" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; width: 200px; height: 50px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
