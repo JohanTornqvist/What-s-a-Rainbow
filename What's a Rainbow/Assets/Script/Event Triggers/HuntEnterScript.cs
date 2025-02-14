@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 
 public class HuntEnterScript : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class HuntEnterScript : MonoBehaviour
     public Rigidbody2D theHunterRb;
     public TeleportPlayer teleport;
     public PlayerInput playerInput;
+    [SerializeField] TilemapRenderer tilemapRenderer;
     [SerializeField] SpriteRenderer sprite;
 
     private void Start()
@@ -28,6 +30,7 @@ public class HuntEnterScript : MonoBehaviour
         theHunter.enabled = false;
         teleport.enabled = false;
         theHunterRb.gravityScale = 0;
+        tilemapRenderer.enabled = true;
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
@@ -44,6 +47,7 @@ public class HuntEnterScript : MonoBehaviour
             emotionControler.playerState = 1;  // Set player state
             playerMove.canMove = false;
             playerInput.enabled = false;
+            tilemapRenderer.enabled = false;
             // Disable movement
 
             // Start coroutine to re-enable movement after delay
