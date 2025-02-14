@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 
 public class HuntExitScript : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class HuntExitScript : MonoBehaviour
     public PlayerMovement playerMove;
     public Hunt_Audio_Controler huntAudio;
     [SerializeField] SpriteRenderer sprite;
+    [SerializeField] TilemapRenderer tilemapRenderer;
 
     private void Start()
     {
+        tilemapRenderer.enabled = true;
         sprite.enabled = false;
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<PlayerMovement>();
@@ -29,6 +32,7 @@ public class HuntExitScript : MonoBehaviour
         {
             emotionControler.playerState = 0;  // Set the player state
             huntAudio.playerState = 0;
+            tilemapRenderer.enabled = false;
         }
     }
 
