@@ -18,7 +18,8 @@
     flex-shrink: 0;
     font-size: 20px;
     -unity-background-image-tint-color: rgb(183, 183, 183);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/ManuHudUI/Menu%20Hud/Sprites/Sk%C3%A4rmbild%202025-02-14%20125255.png?fileID=2800000&guid=68b35218f1cdd7943903c4dc93e8fc39&type=3#Skärmbild 2025-02-14 125255");
 }
 
 .button:hover {
