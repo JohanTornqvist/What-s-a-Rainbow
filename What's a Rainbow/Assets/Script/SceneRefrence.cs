@@ -7,8 +7,11 @@ using UnityEditor;
 [Serializable]
 public class SceneReference
 {
-    [SerializeField] private SceneAsset sceneAsset;
-    [SerializeField] private string scenePath;
+    [SerializeField, Tooltip("The scene asset to reference.")]
+    private SceneAsset sceneAsset;
+
+    [SerializeField, Tooltip("The path to the scene asset.")]
+    private string scenePath;
 
     public string ScenePath => scenePath;
     public string SceneName => System.IO.Path.GetFileNameWithoutExtension(scenePath);
@@ -19,7 +22,15 @@ public class SceneReference
     {
         if (sceneAsset != null)
         {
-            scenePath = AssetDatabase.GetAssetPath(sceneAsset);
+            string path = AssetDatabase.GetAssetPath(sceneAsset);
+            if (!string.IsNullOrEmpty(path) && path.EndsWith(".unity"))
+            {
+                scenePath = path;
+            }
+            else
+            {
+                Debug.LogWarning("The selected asset is not a valid scene file.");
+            }
         }
     }
 #endif
@@ -37,13 +48,27 @@ public class SceneReferenceDrawer : PropertyDrawer
         SerializedProperty sceneAssetProp = property.FindPropertyRelative("sceneAsset");
         SerializedProperty scenePathProp = property.FindPropertyRelative("scenePath");
 
+        // Draw scene asset field with a tooltip
         EditorGUI.BeginChangeCheck();
-        sceneAssetProp.objectReferenceValue = EditorGUI.ObjectField(position, label, sceneAssetProp.objectReferenceValue, typeof(SceneAsset), false);
+        sceneAssetProp.objectReferenceValue = EditorGUI.ObjectField(
+            position,
+            new GUIContent(label.text, "Select a scene asset to reference"),
+            sceneAssetProp.objectReferenceValue,
+            typeof(SceneAsset),
+            false
+        );
+
         if (EditorGUI.EndChangeCheck())
         {
             SceneReference sceneRef = fieldInfo.GetValue(property.serializedObject.targetObject) as SceneReference;
             sceneRef?.UpdateScenePath();
             scenePathProp.stringValue = sceneRef?.ScenePath;
+        }
+
+        // Optionally, display the path under the asset field for better context
+        if (!string.IsNullOrEmpty(scenePathProp.stringValue))
+        {
+            EditorGUI.LabelField(position, "Scene Path:", scenePathProp.stringValue);
         }
 
         EditorGUI.EndProperty();
