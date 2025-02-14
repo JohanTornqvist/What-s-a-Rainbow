@@ -44,35 +44,40 @@ public class HuntEnterScript : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Ensure the Player has the correct tag
         {
-            emotionControler.playerState = 1;  // Set player state
+            emotionControler.playerState = 1;  // Set player state when exiting the trigger zone
+
+            // Disable player movement and input immediately
             playerMove.canMove = false;
             playerInput.enabled = false;
             tilemapRenderer.enabled = false;
-            // Disable movement
 
-            // Start coroutine to re-enable movement after delay
-            StartCoroutine(EnableMovementAfterDelay(2f));
+            // Start coroutine to re-enable movement and other behaviors after a delay
+            StartCoroutine(EnableMovementAfterDelay(2f)); // Delay before re-enabling
         }
     }
 
     private IEnumerator EnableMovementAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); // Wait for the specified time
+        yield return new WaitForSeconds(delay); // Wait for the specified time before proceeding
 
-        playerMove.canMove = true;  // Re-enable movement
-        playerInput.enabled = true;
-        theHunter.enabled = true;
-        teleport.enabled = true;
-        theHunterRb.gravityScale = 5;
+        // Re-enable movement, hunter behavior, and audio after the delay
+        playerMove.canMove = true;  // Re-enable player movement
+        playerInput.enabled = true; // Re-enable player input
+        theHunter.enabled = true;   // Enable the hunter
+        teleport.enabled = true;    // Enable teleportation
+        theHunterRb.gravityScale = 5; // Apply gravity to the hunter
 
+        // Move the hunter to the spawn point and play the audio clip
         hunter.transform.position = hunterSpawnPoint.transform.position;
         if (audioSource != null)
-            audioSource.PlayOneShot(audio_hunt);
-        
+        {
+            audioSource.PlayOneShot(audio_hunt); // Play the "hunt" audio
+        }
     }
 
     public void Update()
     {
+        // Ensure the trigger is disabled when playerState is 1 (after exiting the zone)
         if (emotionControler.playerState == 1)
         {
             if (trigger != null)

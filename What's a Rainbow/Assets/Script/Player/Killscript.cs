@@ -18,7 +18,7 @@ public class Killscript : MonoBehaviour
 
     [SerializeField] private float deathAnimationDuration = 2f;
     [SerializeField] private bool showDeathScreen = true;
-
+    public bool godMode = false;
     void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
@@ -41,16 +41,21 @@ public class Killscript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Death"))
+        if (collision.gameObject.CompareTag("Death") && godMode == false)
         {
             StartDeathSequence();
             Debug.Log("Player has died.");
         }
 
-        if (collision.gameObject.CompareTag("EnemyDeath"))
+        if (collision.gameObject.CompareTag("EnemyDeath") && godMode == false)
         {
             StartDeathSequence();
             Debug.Log("Player has died.");
+        }
+
+        if (collision.gameObject.CompareTag("InstaDeath") && godMode == false)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -82,6 +87,11 @@ public class Killscript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    void OnGodMode()
+    {
+        godMode = true;
     }
 
 }

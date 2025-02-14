@@ -237,6 +237,8 @@ MonoBehaviour:
   jumpPower: 10
   jumpAmount: 1
   jumpsLeft: 0
+  jumpSfx: {fileID: 8300000, guid: 6cb689f71607ac14597f13fa55973919, type: 3}
+  audioSource: {fileID: 2020150201103574636}
   groundFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -256,6 +258,7 @@ MonoBehaviour:
   hasDash: 0
   hasDoubleJump: 0
   hasWallJump: 1
+  noClip: 0
   normMoveSpeedSave: 0
   huntMoveSpeedSave: 10
   sadMoveSpeedSave: 8
@@ -483,11 +486,14 @@ MonoBehaviour:
   canDash: 1
   dashCoolDown: 3
   dashTimer: 0
+  dashSfx: {fileID: 8300000, guid: 10bbf94224c7b634894d70e7e2dd0cfd, type: 3}
+  audioSource: {fileID: 2020150201103574636}
   dashThroughExtraDistance: 2.5
   playerMove: {fileID: 6777034483790588893}
   sphereRadius: 0.24
   sphereHeightOffset: 0.26
   zeroPointOffset: -0.44
+  finalDashHeightOffset: 0.2
 --- !u!114 &141122583540740789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +556,8 @@ MonoBehaviour:
   sideJumpPower: 10
   gravityNormal: 0
   wallGravity: 0
+  jumpSfx: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &6006681411324338725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,3 +575,4 @@ MonoBehaviour:
   playerInput: {fileID: 1277955227841522774}
   deathAnimationDuration: 0.5
   showDeathScreen: 1
+  godMode: 0
