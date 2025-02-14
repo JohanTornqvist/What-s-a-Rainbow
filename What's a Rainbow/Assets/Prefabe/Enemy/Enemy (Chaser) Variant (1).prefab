@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 85666673221778666}
   m_Layer: 8
   m_Name: Enemy (Chaser) Variant (1)
-  m_TagString: Death
+  m_TagString: EnemyDeath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

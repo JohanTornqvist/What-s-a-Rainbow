@@ -12,6 +12,7 @@ TagManager:
   - TheHunterKill
   - InstaDeath
   - DashIgnore
+  - EnemyDeath
   layers:
   - Default
   - TransparentFX
