@@ -9326,6 +9326,14 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[393].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
+    - target: {fileID: 2517777651567223996, guid: 0dcbe0b0cb7ab624691d741d0c561b27, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517777651567223996, guid: 0dcbe0b0cb7ab624691d741d0c561b27, type: 3}
+      propertyPath: volumeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5972399809202156461, guid: 0dcbe0b0cb7ab624691d741d0c561b27, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 3

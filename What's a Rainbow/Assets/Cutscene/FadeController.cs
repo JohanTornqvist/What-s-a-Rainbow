@@ -9,6 +9,7 @@ public class FadeController : MonoBehaviour
     public TextMeshProUGUI headerText;
     public float fadeDuration = 2f;
     public float stayDuration = 3f;
+
     private float targetAlpha = 0f;
     private float startAlphaImage = 1f;
     private float startAlphaText = 1f;
@@ -16,8 +17,25 @@ public class FadeController : MonoBehaviour
     private float elapsedTime = 0f;
     private bool isFading = false;
 
+    [Header("Audio Settings")]
+    public AudioSource audioSource; // 🔹 Audio source for playing sound
+    public AudioClip startSound;    // 🔹 Assignable clip in Inspector
+
     void Start()
     {
+        // 🔹 Automatically create an AudioSource if none is assigned
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // 🔹 Play the sound at scene start (if assigned)
+        if (audioSource != null && startSound != null)
+        {
+            audioSource.clip = startSound;
+            audioSource.Play();
+        }
+
         // 🔹 Check if fade should be skipped (Scene loaded from Pause Menu)
         if (PlayerPrefs.GetInt("SkipFade", 0) == 1)
         {
@@ -31,11 +49,6 @@ public class FadeController : MonoBehaviour
             PlayerPrefs.Save();
             return;
         }
-
-        Cursor.visible = false;
-        startAlphaImage = fadeImage.color.a;
-        if (myText != null) startAlphaText = myText.color.a;
-        if (headerText != null) startAlphaHeader = headerText.color.a;
     }
 
     void Update()
