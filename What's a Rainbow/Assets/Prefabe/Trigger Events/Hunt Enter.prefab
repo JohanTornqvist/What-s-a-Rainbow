@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.99, y: 1.01, z: 0}
-  m_LocalScale: {x: 3.1394, y: 5.3028, z: 1}
+  m_LocalScale: {x: 3.1394, y: 180.59, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -156,6 +156,7 @@ MonoBehaviour:
   playerMove: {fileID: 0}
   hunterSpawnPoint: {fileID: 0}
   hunter: {fileID: 0}
+  playerInput: {fileID: 0}
   sprite: {fileID: 5597893335563904766}
 --- !u!82 &8994243508980963598
 AudioSource:

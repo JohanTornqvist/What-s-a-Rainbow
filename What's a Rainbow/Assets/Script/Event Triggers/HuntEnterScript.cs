@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class HuntEnterScript : MonoBehaviour
@@ -13,6 +14,10 @@ public class HuntEnterScript : MonoBehaviour
     public PlayerMovement playerMove;
     public GameObject hunterSpawnPoint;
     public GameObject hunter;
+    public TheHunter theHunter;
+    public Rigidbody2D theHunterRb;
+    public TeleportPlayer teleport;
+    public PlayerInput playerInput;
     [SerializeField] SpriteRenderer sprite;
 
     private void Start()
@@ -20,6 +25,9 @@ public class HuntEnterScript : MonoBehaviour
         sprite.enabled = false;
         GameObject player = GameObject.FindWithTag("Player");
         playerMove = player.GetComponent<PlayerMovement>();
+        theHunter.enabled = false;
+        teleport.enabled = false;
+        theHunterRb.gravityScale = 0;
 
         GameObject Emotion = GameObject.FindWithTag("EmotionControle");
         emotionControler = Emotion.GetComponent<Emotion>();
@@ -34,7 +42,9 @@ public class HuntEnterScript : MonoBehaviour
         if (other.CompareTag("Player")) // Ensure the Player has the correct tag
         {
             emotionControler.playerState = 1;  // Set player state
-            playerMove.canMove = false;        // Disable movement
+            playerMove.canMove = false;
+            playerInput.enabled = false;
+            // Disable movement
 
             // Start coroutine to re-enable movement after delay
             StartCoroutine(EnableMovementAfterDelay(2f));
@@ -46,6 +56,12 @@ public class HuntEnterScript : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified time
 
         playerMove.canMove = true;  // Re-enable movement
+        playerInput.enabled = true;
+        theHunter.enabled = true;
+        teleport.enabled = true;
+        theHunterRb.gravityScale = 5;
+
+        hunter.transform.position = hunterSpawnPoint.transform.position;
         if (audioSource != null)
             audioSource.PlayOneShot(audio_hunt);
         
