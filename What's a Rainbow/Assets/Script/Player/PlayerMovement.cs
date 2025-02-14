@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (canJump)
+        if (canJump || noClip == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower); // Apply jump force
             audioSource.PlayOneShot(jumpSfx);
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Update the player movement and check if on the ground
-        if (canMove)
+        if (canMove && noClip == false)
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             if (moveInput.x != 0)
@@ -125,13 +125,15 @@ public class PlayerMovement : MonoBehaviour
         if (noClip)
         {
             rb.bodyType = RigidbodyType2D.Kinematic; // Disable physics
-            rb.velocity = Vector2.zero; // Stop movement
-            col.enabled = false; // Disable collisions
+           
+            if(moveInput == new Vector2(0, 0))
+            {
+                rb.velocity = Vector2.zero; // Stop movement
+            }
         }
         else
         {
             rb.bodyType = RigidbodyType2D.Dynamic; // Restore physics
-            col.enabled = true; // Enable collisions
         }
     }
 
