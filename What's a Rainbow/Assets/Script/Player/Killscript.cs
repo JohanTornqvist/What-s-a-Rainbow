@@ -46,6 +46,12 @@ public class Killscript : MonoBehaviour
             StartDeathSequence();
             Debug.Log("Player has died.");
         }
+
+        if (collision.gameObject.CompareTag("EnemyDeath"))
+        {
+            StartDeathSequence();
+            Debug.Log("Player has died.");
+        }
     }
 
     public void StartDeathSequence()

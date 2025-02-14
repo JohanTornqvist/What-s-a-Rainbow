@@ -4,7 +4,7 @@ public class TheHunterKill : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Death"))
+        if (collision.CompareTag("EnemyDeath"))
         {
             Destroy(collision.gameObject);
         }

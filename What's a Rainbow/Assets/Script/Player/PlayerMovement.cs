@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpPower = 10f;
     [SerializeField] int jumpAmount = 1;
     public int jumpsLeft;
+    [SerializeField] AudioClip jumpSfx;
+    [SerializeField] AudioSource audioSource;
 
     [Header("Ground Check:")]
     [SerializeField] ContactFilter2D groundFilter;
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool hasDash = false;
     public bool hasDoubleJump = false;
     public bool hasWallJump = false;
+    [SerializeField] bool noClip;
 
     [Header("State saves:")]
     public float normMoveSpeedSave;
@@ -57,15 +60,17 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (canJump)
+        if (canJump || noClip == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower); // Apply jump force
+            audioSource.PlayOneShot(jumpSfx);
             jumpsLeft = hasDoubleJump ? 1 : 0; // Allow double jump if enabled
             ani.SetTrigger("isJumping"); // Trigger jump animation
         }
         else if (canJump == false && jumpsLeft > 0 && hasDoubleJump == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower); // Apply jump force for double jump
+            audioSource.PlayOneShot(jumpSfx);
             jumpsLeft = 0; // No more jumps left after double jump
         }
     }
@@ -73,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Update the player movement and check if on the ground
-        if (canMove)
+        if (canMove && noClip == false)
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             if (moveInput.x != 0)
@@ -108,6 +113,27 @@ public class PlayerMovement : MonoBehaviour
             case 2:
                 Sad();
                 break;
+        }
+
+
+    }
+
+    public void OnNoClip(InputValue value)
+    {
+        noClip = !noClip;
+
+        if (noClip)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic; // Disable physics
+           
+            if(moveInput == new Vector2(0, 0))
+            {
+                rb.velocity = Vector2.zero; // Stop movement
+            }
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic; // Restore physics
         }
     }
 

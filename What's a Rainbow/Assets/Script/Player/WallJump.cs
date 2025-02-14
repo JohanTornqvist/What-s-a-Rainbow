@@ -23,6 +23,8 @@ public class WallJump : MonoBehaviour
 
     private bool isTouchingWall = false;
     private Vector2 facingDirection = Vector2.right;
+    [SerializeField] AudioClip jumpSfx;
+    [SerializeField] AudioSource audioSource;
 
     void Start()
     {
@@ -88,6 +90,7 @@ public class WallJump : MonoBehaviour
         if (playerMove.hasWallJump && isTouchingWall)
         {
             float jumpDirection = facingDirection.x > 0 ? -1 : 1; // Flip jump direction away from the wall
+            audioSource.PlayOneShot(jumpSfx);
             rb.velocity = new Vector2(jumpDirection * sideJumpPower, wallJumpPower);
         }
     }
