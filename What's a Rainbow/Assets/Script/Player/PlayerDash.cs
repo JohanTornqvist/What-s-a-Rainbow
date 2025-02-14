@@ -12,6 +12,8 @@ public class PlayerDash : MonoBehaviour
     public bool canDash = true;
     public float dashCoolDown = 3f;
     public float dashTimer;
+    [SerializeField] AudioClip dashSfx;
+    [SerializeField] AudioSource audioSource;
 
     public float dashThroughExtraDistance = 1f; // Extra distance to dash through an object
     public PlayerMovement playerMove;
@@ -92,6 +94,7 @@ public class PlayerDash : MonoBehaviour
                     (lowerHit.collider != null && ((1 << lowerHit.collider.gameObject.layer) & dashThroughLayer) != 0))
                 {
                     dashTarget += dashDirection * dashThroughExtraDistance;
+                    audioSource.PlayOneShot(dashSfx);
                     Debug.Log("Dash through triggered!");
                 }
 
@@ -100,6 +103,7 @@ public class PlayerDash : MonoBehaviour
 
                 // Move player instantly
                 rb.position = dashTarget;
+                audioSource.PlayOneShot(dashSfx);
                 dashTimer = dashCoolDown;
                 canDash = false;
             }
