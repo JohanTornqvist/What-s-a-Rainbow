@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 6513830429058569782}
   - component: {fileID: 7506232502573158905}
   - component: {fileID: 3332970957797642368}
-  - component: {fileID: 4314671395072494602}
+  - component: {fileID: 8788795084226800460}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -253,9 +253,9 @@ MonoBehaviour:
     maxNormalAngle: 0
   canMove: 1
   canJump: 1
-  hasDash: 0
+  hasDash: 1
   hasDoubleJump: 0
-  hasWallJump: 0
+  hasWallJump: 1
   normMoveSpeedSave: 0
   huntMoveSpeedSave: 10
   sadMoveSpeedSave: 8
@@ -483,11 +483,12 @@ MonoBehaviour:
   canDash: 1
   dashCoolDown: 3
   dashTimer: 0
-  dashThroughExtraDistance: 1.5
+  dashThroughExtraDistance: 2.5
   playerMove: {fileID: 912612601392286202}
   sphereRadius: 0.24
   sphereHeightOffset: 0.26
   zeroPointOffset: -0.44
+  finalDashHeightOffset: 0.2
 --- !u!114 &8052019003438905629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ MonoBehaviour:
   sideJumpPower: 10
   gravityNormal: 0
   wallGravity: 0
---- !u!114 &4314671395072494602
+--- !u!114 &8788795084226800460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,5 +563,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0181e70a97a6f4197b59ef94a32ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathAnimationDuration: 2
+<<<<<<< Updated upstream
+  playerMove: {fileID: 912612601392286202}
+  playerDash: {fileID: 5749868438022397188}
+  playerInput: {fileID: 3904651099320909819}
+  deathAnimationDuration: 0.5
+=======
+  deathAnimationDuration: 1.5
+  playerMove: {fileID: 0}
+  playerDash: {fileID: 0}
+>>>>>>> Stashed changes
   showDeathScreen: 1
